@@ -5,9 +5,19 @@ type Data = {
   name: string
 }
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
+  // <Data>
 ) {
-  res.status(200).json({ name: 'John Doe' })
+  const query = `query {
+    books {
+      id
+      title
+      addedAt
+    }
+  }`
+  const respose = await fetch('https://library-database.hasura.app/v1/graphql',{method:"POST",body:JSON.stringify({query})});  
+  const data = await respose.json();
+  res.status(200).json({ data });
 }
