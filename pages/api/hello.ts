@@ -11,13 +11,13 @@ export default async function handler(
   // <Data>
 ) {
   const query = `query {
-    books {
+    books_table {
       id
       title
-      addedAt
+      author
     }
   }`
-  const respose = await fetch('https://library-database.hasura.app/v1/graphql',{method:"POST",body:JSON.stringify({query})});  
+  const respose = await fetch('http://localhost:8080/v1/graphql',{method:"POST",body:JSON.stringify({query})});  
   const data = await respose.json();
   res.status(200).json({ data });
 }
