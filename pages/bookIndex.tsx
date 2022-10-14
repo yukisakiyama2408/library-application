@@ -30,7 +30,11 @@ const BookIndex = ()=> {
   return (
     <div>
         {books.map((book) => (
-          <div key={book.id}>{book.title}</div>
+          <div key={book.id}>
+          <p >{book.title}</p>
+          <img src={book.image_url}/>
+          <p>{book.author}</p>
+          </div>
         ))}
     </div>
   )
