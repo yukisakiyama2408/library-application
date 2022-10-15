@@ -11,6 +11,29 @@ interface Book{
 
 const BookIndex = ()=> {
   const [books, setBooks] = useState<Array<Book>>([]);
+  // useEffect(() => {
+  //   (async()=>{
+  //     const { data } = await client.query({
+  //       query: gql`
+  //       query{
+  //         books_table{
+  //           id
+  //           title
+  //           author
+  //           image_url
+  //         }
+  //       }
+  //     `,
+  //     });
+  //    console.log(data.books_table)
+  //    console.log(data.data)
+  //    console.log(data)
+  //   //  console.log(res.data.data)
+  //   //  console.log(res.data.data.data)
+  //     setBooks(data.data.data.books_table);
+  //   });
+  // },[])
+
   useEffect(() => {
     axios
     .get('api/hello', {
