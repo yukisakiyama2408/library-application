@@ -27,12 +27,26 @@ const BookInput = () => {
     return (
       <form className="formInput" onSubmit={(e) => {
         e.preventDefault();
+        addBook({variables: {title: title, author:author,image_url:image_url }});
+
       }}>
         <input
           className="input"
           placeholder="本のタイトル"
           value={title}
           onChange={e => (setTitle(e.target.value))}
+        />
+         <input
+          className="input"
+          placeholder="著者"
+          value={author}
+          onChange={e => (setAuthor(e.target.value))}
+        />
+         <input
+          className="input"
+          placeholder="著者"
+          value={image_url}
+          onChange={e => (setImage_url(e.target.value))}
         />
         <i className="inputMarker fa fa-angle-right" />
       </form>
