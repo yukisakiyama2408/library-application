@@ -1,6 +1,8 @@
 import React,{useState} from "react";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
+// import {GET_BOOKS} from "./bookIndex"
 
 const ADD_BOOK = gql `
 mutation ($title: String!, $author: String!,$image_url: String!) {
@@ -21,8 +23,19 @@ const BookInput = () => {
     const [author,setAuthor] = useState("")
     const [image_url,setImage_url] = useState("")
 
-    const [addBook] = useMutation(ADD_BOOK);
+    // const updateCache =(cache, {data})=>{
+    //   const registeredBooks = cache.readQuery({
+    //     query: GET_BOOKS
+    //   });
+    //   const newBooks = data.insert_books_table.returning[0];
+    //   cache.writeQuery({
+    //     query: GET_BOOKS,
+    //     data: {books: [newBooks, ...registeredBooks.s]}
+    //   });
+    // };
+    // }
 
+    const [addBook] = useMutation(ADD_BOOK);
 
     return (
       <form className="formInput" onSubmit={(e) => {
@@ -44,7 +57,7 @@ const BookInput = () => {
         />
          <input
           className="input"
-          placeholder="著者"
+          placeholder="画像URL"
           value={image_url}
           onChange={e => (setImage_url(e.target.value))}
         />
