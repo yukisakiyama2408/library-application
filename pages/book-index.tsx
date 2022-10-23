@@ -1,7 +1,6 @@
 import {useState,useEffect} from 'react'
-import { gql} from '@apollo/client';
+import { gql, useQuery} from '@apollo/client';
 import {client} from './api/apollo-client';
-
 
 const GET_BOOKS = gql`
 query{
@@ -25,8 +24,6 @@ export async function getStaticProps() {
  };
 }
 
-
-
 interface Book{
   id: string; title: string; author:string,image_url:string 
 }
@@ -37,6 +34,9 @@ type Props = {
 
 
 const BookIndex:React.FC<Props>= ({books})=> {
+  // const {data} = useQuery<Props>(GET_BOOKS)
+  
+
   
   return (
     <div>

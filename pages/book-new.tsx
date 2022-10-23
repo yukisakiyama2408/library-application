@@ -1,8 +1,7 @@
 import React,{useState} from "react";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
-import { redirect } from "next/dist/server/api-utils";
-
+import { useRouter } from "next/router";
 
 const ADD_BOOK = gql `
 mutation ($title: String!, $author: String!,$image_url: String!) {
@@ -19,6 +18,7 @@ mutation ($title: String!, $author: String!,$image_url: String!) {
 `;
 
 const BookInput = () => {
+  const router = useRouter()
     const [title, setTitle] = useState('');
     const [author,setAuthor] = useState("")
     const [image_url,setImage_url] = useState("")
@@ -38,10 +38,7 @@ const BookInput = () => {
         variables: { title: title, author:author,image_url:image_url},
         // refetchQueries: [{ query: GET_BOOKS }]
       })
-      redirect:{
-        permanent: false
-        destination: '/bookIndex'
-      }
+      router.push("/book-index")
     }
 
     return (
