@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react'
-import { gql, useQuery } from '@apollo/client';
-import client from './api/apollo-client';
+import { gql} from '@apollo/client';
+import {client} from './api/apollo-client';
 
 
 const GET_BOOKS = gql`
@@ -37,7 +37,6 @@ type Props = {
 
 
 const BookIndex:React.FC<Props>= ({books})=> {
-
   
   return (
     <div>
