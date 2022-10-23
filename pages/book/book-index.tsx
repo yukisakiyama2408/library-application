@@ -1,6 +1,6 @@
-import {useState,useEffect} from 'react'
 import { gql, useQuery} from '@apollo/client';
-import {client} from './api/apollo-client';
+import {client} from '../api/apollo-client';
+
 
 const GET_BOOKS = gql`
 query{
@@ -12,6 +12,7 @@ query{
   }
 }
 `
+
 export async function getStaticProps() {
   const { data } = await client.query({
     query: GET_BOOKS,
