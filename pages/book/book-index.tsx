@@ -1,5 +1,4 @@
 import { gql, useQuery} from '@apollo/client';
-import {client} from '../api/apollo-client';
 import Link from 'next/link';
 
 
@@ -13,18 +12,6 @@ query GetBooks {
   }
 }
 `
-
-// export async function getStaticProps() {
-//   const { data } = await client.query({
-//     query: GET_BOOKS,
-//   });
-
-//   return {
-//     props: {
-//       books: data.books_table,
-//         },
-//  };
-// }
 
 interface Book{
   id: string; title: string; author:string,image_url:string 
@@ -49,7 +36,7 @@ const BookIndex= ()=> {
           <p >{book.title}</p>
           <img src={book.image_url}/>
           <p>{book.author}</p>
-          <Link href="/book/$[book.id]" as={`/${book.id}`} >
+          <Link href="/book/[id]" as={`/book/${book.id}`} >
             <a>詳細</a>
           </Link>
           </div>
