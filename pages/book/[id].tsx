@@ -29,11 +29,11 @@ const BookEdit =()=>{
         variables:{id}
     })
     // console.log(data)
-    const book= !data? []:data.books_table
+    const book= !data? []:data.books_table[0]
      console.log(book)
     // const {title,author,image_url}=router.query
     // console.log(router.query)
-    return( <div> {book[0].title}の著者は{book[0].author}です</div>)
+    return( <div> {book.title}の著者は{book.author}です</div>)
 }
 
 export default BookEdit
