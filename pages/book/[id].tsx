@@ -1,6 +1,6 @@
 import { gql, useQuery} from '@apollo/client';
 import { useRouter } from 'next/router';
-
+import Link from 'next/link';
 
 const GET_BOOK = gql`
 query getBook($id:Int!) {
@@ -33,7 +33,19 @@ const BookEdit =()=>{
      console.log(book)
     // const {title,author,image_url}=router.query
     // console.log(router.query)
-    return( <div> {book.title}の著者は{book.author}です</div>)
+    return( 
+    <div>
+       <div>
+        <Link href="/book/book-index" as={"/book/book-index"} >
+        <a>Back to Home</a>
+      </Link>
+      </div>
+      <div>
+        <h2> {book.title}</h2>
+        <img src={book.image_url}/>
+        <p>{book.author}</p>
+      </div>
+    </div>)
 }
 
 export default BookEdit

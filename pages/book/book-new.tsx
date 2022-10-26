@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import Link from "next/link";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -42,29 +43,39 @@ const BookInput = () => {
     }
 
     return (
-      <form onSubmit={e => handleAddBook(e)}>
-        <input
-        type="text"
-        name="title"
-        placeholder="本のタイトル"
-        value={title}
-        onChange={e => (setTitle(e.target.value))}
-        />
-         <input
-         type="text"
-         placeholder="著者"
-         value={author}
-         onChange={e => (setAuthor(e.target.value))}
-        />
-         <input
-         type="text"
-         name="image_url"
-         placeholder="画像URL"
-         value={image_url}
-         onChange={e => (setImage_url(e.target.value))}
-        />
-        <button type="submit">登録</button>
+      <div>
+         <div>
+        <Link href="/book/book-index" as={"/book/book-index"} >
+        <a>Back to Home</a>
+      </Link>
+      </div>
+      <div>
+        <form onSubmit={e => handleAddBook(e)}>
+          <input
+          type="text"
+          name="title"
+          placeholder="本のタイトル"
+          value={title}
+          onChange={e => (setTitle(e.target.value))}
+          />
+       <input
+       type="text"
+       placeholder="著者"
+       value={author}
+       onChange={e => (setAuthor(e.target.value))}
+      />
+       <input
+       type="text"
+       name="image_url"
+       placeholder="画像URL"
+       value={image_url}
+       onChange={e => (setImage_url(e.target.value))}
+      />
+      <button type="submit">登録</button>
       </form>
+      </div>
+      </div>
+     
     );
     }
   

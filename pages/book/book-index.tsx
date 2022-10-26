@@ -31,17 +31,24 @@ const BookIndex= ()=> {
   
   return (
     <div>
-        {books.map((book) => (
-          <div key={book.id}>
-          <p >{book.title}</p>
-          <img src={book.image_url}/>
-          <p>{book.author}</p>
-          <Link href="/book/[id]" as={`/book/${book.id}`} >
-            <a>詳細</a>
-          </Link>
-          </div>
-        ))}
-    </div>
+      <div>
+      <div>
+        <Link href="/book/book-new" as={"/book/book-new"} >
+        <a>Register</a>
+      </Link>
+      </div>
+    {books.map((book) => (
+      <div key={book.id}>
+      <p >{book.title}</p>
+      <img src={book.image_url}/>
+      <p>{book.author}</p>
+      <Link href="/book/[id]" as={`/book/${book.id}`} >
+        <a>詳細</a>
+      </Link>
+      </div>
+    ))}
+</div></div>
+    
   )
 }
 
