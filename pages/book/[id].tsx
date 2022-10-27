@@ -1,7 +1,7 @@
 import { gql, useQuery} from '@apollo/client';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import BookUpdate from './[id]/book-update';
+import BookDelete from './[id]/book-delete';
 
 const GET_BOOK = gql`
 query getBook($id:Int!) {
@@ -15,7 +15,7 @@ query getBook($id:Int!) {
 `
 
 interface Book{
-    id: string; title: string; author:string,image_url:string 
+    id: number; title: string; author:string,image_url:string 
   }
 
 const BookDetail =()=>{
@@ -47,6 +47,7 @@ const BookDetail =()=>{
         <Link href="/book/[id]/book-update" as={`/book/${book.id}/book-update`} >
         <a>Update</a>
       </Link>
+      <div><BookDelete id={book.id}/></div>
       </div>
       
     </div>)
