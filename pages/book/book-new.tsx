@@ -39,7 +39,7 @@ const BookInput = () => {
         variables: { title: title, author:author,image_url:image_url},
         // refetchQueries: [{ query: GET_BOOKS }]
       })
-      router.push("/book-index")
+      router.push("/book/book-index")
     }
 
     return (
