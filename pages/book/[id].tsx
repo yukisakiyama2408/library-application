@@ -10,12 +10,13 @@ query getBook($id:Int!) {
       title
       author
       image_url
+      description
     }
   }
 `
 
 interface Book{
-    id: number; title: string; author:string,image_url:string 
+    id: number; title: string; author:string,image_url:string,description:string
   }
 
 const BookDetail =()=>{
@@ -35,17 +36,18 @@ const BookDetail =()=>{
     <div>
        <div>
         <Link href="/book/book-index" as={"/book/book-index"} >
-        <a>Back to Home</a>
+        Back to Home
       </Link>
       </div>
       <div>
         <h2> {book.title}</h2>
         <img src={book.image_url}/>
         <p>{book.author}</p>
+        <p>{book.description}</p>
       </div>
       <div>
         <Link href="/book/[id]/book-update" as={`/book/${book.id}/book-update`} >
-        <a>Update</a>
+        Update
       </Link>
       <div><BookDelete id={book.id}/></div>
       </div>

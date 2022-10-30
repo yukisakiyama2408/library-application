@@ -34,7 +34,7 @@ const BookIndex= ()=> {
       <div>
       <div>
         <Link href="/book/book-new" as={"/book/book-new"} >
-        <a>Register</a>
+          Register
       </Link>
       </div>
     {books.map((book) => (
@@ -43,7 +43,7 @@ const BookIndex= ()=> {
       <img src={book.image_url}/>
       <p>{book.author}</p>
       <Link href="/book/[id]" as={`/book/${book.id}`} >
-        <a>詳細</a>
+        詳細
       </Link>
       </div>
     ))}
