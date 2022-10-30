@@ -11,6 +11,11 @@ a {
   text-decoration: none;
 }
 
+.book-card-index{
+  padding-top:15px;
+  padding-bottom: 15px;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -1,5 +1,6 @@
 import { gql, useQuery} from '@apollo/client';
 import Link from 'next/link';
+import { Card ,CardContent,CardActionArea,CardMedia,Typography,Container} from '@mui/material';
 
 
 const GET_BOOKS = gql`
@@ -30,26 +31,39 @@ const BookIndex= ()=> {
 
   
   return (
-    <div>
-      <div>
+    <>
       <div>
         <Link href="/book/book-new" as={"/book/book-new"} >
           Register
       </Link>
       </div>
-    {books.map((book) => (
-      <div key={book.id}>
-      <p >{book.title}</p>
-      <img src={book.image_url}/>
-      <p>{book.author}</p>
-      <Link href="/book/[id]" as={`/book/${book.id}`} >
-        詳細
-      </Link>
+      <Container maxWidth="sm"> 
+         {books.map((book) => (
+      <div key={book.id} className="book-card-index">
+        <Card sx={{ maxWidth: 345 }}>
+          <CardActionArea href={`/book/${book.id}`}>
+            <CardMedia
+            component="img"
+            height="500"
+            image={book.image_url}
+            alt="本の表紙"/>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {book.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {book.author}
+              </Typography>
+        </CardContent>
+        </CardActionArea>
+        </Card>
+        <div>
+        </div>
       </div>
-    ))}
-</div></div>
+    ))} </Container>
     
-  )
+    </>
+    )
 }
 
 export default BookIndex
