@@ -1,6 +1,6 @@
 import { gql, useQuery} from '@apollo/client';
 import Link from 'next/link';
-import { Card ,CardContent,CardActionArea,CardMedia,Typography,Container} from '@mui/material';
+import { Card ,CardContent,CardActionArea,CardMedia,Typography,Container,Button} from '@mui/material';
 
 
 const GET_BOOKS = gql`
@@ -32,13 +32,15 @@ const BookIndex= ()=> {
   
   return (
     <>
-      <div>
-        <Link href="/book/book-new" as={"/book/book-new"} >
-          Register
-      </Link>
-      </div>
       <Container maxWidth="sm"> 
-         {books.map((book) => (
+      <div>
+      <Button variant="contained" href="/book/book-new">REGISTER</Button>
+        {/* <Link href="/book/book-new" as={"/book/book-new"} >
+          Register
+      </Link> */}
+      </div>
+      <div className='book-card-box'>
+      {books.map((book) => (
       <div key={book.id} className="book-card-index">
         <Card sx={{ maxWidth: 345 }}>
           <CardActionArea href={`/book/${book.id}`}>
@@ -60,7 +62,9 @@ const BookIndex= ()=> {
         <div>
         </div>
       </div>
-    ))} </Container>
+    ))} 
+      </div>
+     </Container>
     
     </>
     )
