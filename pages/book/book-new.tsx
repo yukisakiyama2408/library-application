@@ -3,6 +3,7 @@ import Link from "next/link";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import { Box,TextField,Container,Grid,Button } from "@mui/material";
 
 const ADD_BOOK = gql `
 mutation ($title: String!, $author: String!,$image_url: String!,$description:String!) {
@@ -48,45 +49,57 @@ const BookInput = () => {
 
     return (
       <div>
+        <Container component="main" maxWidth="xs">
          <div>
-        <Link href="/book/book-index" as={"/book/book-index"} >
-        <a>Back to Home</a>
-      </Link>
+          <Button variant="contained" href="/book/book-index">Back to Home</Button>
       </div>
-      <div>
-        <form onSubmit={e => handleAddBook(e)}>
-          <input
-          type="text"
-          name="title"
-          placeholder="本のタイトル"
-          value={title}
-          onChange={e => (setTitle(e.target.value))}
-          />
-       <input
-       type="text"
-       placeholder="著者"
-       value={author}
-       onChange={e => (setAuthor(e.target.value))}
-      />
-       <input
-       type="text"
-       name="image_url"
-       placeholder="画像URL"
-       value={image_url}
-       onChange={e => (setImage_url(e.target.value))}
-      />
-        <input
-       type="text"
-       name="description"
-       placeholder="詳細"
-       value={description}
-       onChange={e => (setDescription(e.target.value))}
-      />
-      <button type="submit">登録</button>
-      </form>
-      </div>
-      </div>
-     
+          <Box 
+          component="form"
+          onSubmit={e => handleAddBook(e)}
+          sx={{ mt: 1 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                type="text"
+                name="title"
+                placeholder="本のタイトル"
+                value={title}
+                onChange={e => (setTitle(e.target.value))}
+                />
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
+                type="text"
+                placeholder="著者"
+                value={author}
+                onChange={e => (setAuthor(e.target.value))}
+                />
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
+                type="text"
+                name="image_url"
+                placeholder="画像URL"
+                value={image_url}
+                onChange={e => (setImage_url(e.target.value))}
+                />
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
+                type="text"
+                name="description"
+                placeholder="詳細"
+                value={description}
+                onChange={e => (setDescription(e.target.value))}
+                />
+                </Grid>
+            </Grid>
+            <div className="register-button">
+            <Button variant="contained" type="submit">登録</Button>
+            </div>
+      </Box>
+      </Container>
+      </div>     
     );
     }
   

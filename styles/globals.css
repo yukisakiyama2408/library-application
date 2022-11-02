@@ -16,6 +16,10 @@ a {
   padding-bottom: 15px;
 }
 
+.register-button{
+  margin-top:10px;
+}
+
 * {
   box-sizing: border-box;
 }
