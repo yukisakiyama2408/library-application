@@ -1,4 +1,5 @@
 import { gql, useQuery} from '@apollo/client';
+import GlobalHeader from '../globalHeader';
 import Link from 'next/link';
 import { Card ,CardContent,CardActionArea,CardMedia,Typography,Container,Button,Grid,styled} from '@mui/material';
 
@@ -29,6 +30,9 @@ const BookIndex= ()=> {
   
   return (
     <>
+    <div>
+      <GlobalHeader/>
+    </div>
     <div className='book-index-section'>
    
     <div>
