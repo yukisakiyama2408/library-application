@@ -1,5 +1,6 @@
 import { gql ,useMutation} from "@apollo/client"
 import { useRouter } from "next/router";
+import { Button } from "@mui/material";
 
 
 const DELETE_BOOK = gql `
@@ -29,7 +30,7 @@ const BookDelete:React.FC<Id> =({id})=>{
       }
 
       return<div>
-        <div> <button onClick={handleDeleteBook}>削除</button></div>
+        <div> <Button variant="contained" onClick={handleDeleteBook}>削除</Button></div>
       </div>
 
 }
