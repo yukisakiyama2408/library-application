@@ -2,6 +2,7 @@ import { gql, useQuery} from '@apollo/client';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import BookDelete from './[id]/book-delete';
+import { Container,Typography,Button,Box } from '@mui/material';
 
 const GET_BOOK = gql`
 query getBook($id:Int!) {
@@ -22,33 +23,39 @@ interface Book{
 const BookDetail =()=>{
     const router = useRouter();
     const id = router.query.id
-    // console.log(id)
     const {data} = useQuery(GET_BOOK,{
         variables:{id}
     })
     console.log(data)
     const book:Book= !data? []:data.books_table[0]
      console.log(book)
-    // const {title,author,image_url}=router.query
-    // console.log(router.query)
 
     return( 
     <div>
        <div>
-        <Link href="/book/book-index" as={"/book/book-index"} >
-        Back to Home
-      </Link>
+        <Button variant="contained" href="/book/book-index">
+          Back to Home
+        </Button>
       </div>
-      <div>
-        <h2> {book.title}</h2>
-        <img src={book.image_url}/>
-        <p>{book.author}</p>
+      <Container>
+      <div className='image-section'>
+          <img src={book.image_url}/>
+          </div>
+          <div className='info-section'>
+          <h2> {book.title}</h2>
+          <p>{book.author}</p>
+          </div>
         <p>{book.description}</p>
-      </div>
+      </Container>
       <div>
-        <Link href="/book/[id]/book-update" as={`/book/${book.id}/book-update`} >
-        Update
-      </Link>
+        <div>
+      <Button variant="contained" href={`/book/${book.id}/book-update`}>
+          Update
+      </Button>
+        </div>
+      {/* //   <Link href="/book/[id]/book-update" as={`/book/${book.id}/book-update`} >
+      //   Update
+      // </Link> */}
       <div><BookDelete id={book.id}/></div>
       </div>
       

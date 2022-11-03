@@ -1,6 +1,6 @@
 import { gql, useQuery} from '@apollo/client';
 import Link from 'next/link';
-import { Card ,CardContent,CardActionArea,CardMedia,Typography,Container,Button,Grid} from '@mui/material';
+import { Card ,CardContent,CardActionArea,CardMedia,Typography,Container,Button,Grid,styled} from '@mui/material';
 
 
 const GET_BOOKS = gql`
@@ -22,24 +22,18 @@ type Props = {
   books_table: Array<Book>
 }
 
-
 const BookIndex= ()=> {
   const {data} = useQuery<Props>(GET_BOOKS)
   console.log(data)
   const books= !data? []:data.books_table
   
-
-  
   return (
     <>
-      <Container maxWidth="sm"> 
-      <div>
-      <Button variant="contained" href="/book/book-new">REGISTER</Button>
-      </div>
-      <Grid container spacing={2}>
-        <Grid xs={8}>
-          {books.map((book) => (
-      <div key={book.id} className="book-card-index">
+    <div className='book-index-section'>
+   
+    <div>
+    {books.map((book) => (
+          <div key={book.id} className="book-card-index">
         <Card sx={{ maxWidth: 345 }}>
           <CardActionArea href={`/book/${book.id}`}>
             <CardMedia
@@ -48,7 +42,7 @@ const BookIndex= ()=> {
             image={book.image_url}
             alt="本の表紙"/>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h6" component="div">
                 {book.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -58,10 +52,12 @@ const BookIndex= ()=> {
         </CardActionArea>
         </Card>
       </div>
-    ))} </Grid>   
-      </Grid>
-     </Container>
-    
+    ))}
+    </div>
+    <div className='index-add-btn'>
+      <Button variant="contained" href="/book/book-new">REGISTER</Button>
+    </div>
+    </div>
     </>
     )
 }

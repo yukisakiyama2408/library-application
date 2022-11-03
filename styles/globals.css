@@ -11,14 +11,31 @@ a {
   text-decoration: none;
 }
 
+.book-index-section{
+  display: flex;
+  justify-content: center;
+}
+
+.index-add-btn{
+  margin:10px;
+}
+
 .book-card-index{
-  padding-top:15px;
-  padding-bottom: 15px;
+ margin:10px;
+  float:left;
 }
 
 .register-button{
   margin-top:10px;
 }
+
+.image-section{
+  float: left;
+}
+
+/* .info-section{
+  float: left;
+} */
 
 * {
   box-sizing: border-box;

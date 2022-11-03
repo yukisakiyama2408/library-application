@@ -40,7 +40,6 @@ const BookUpdate =()=>{
   const {data} = useQuery(GET_BOOK,{
       variables:{id}
   })
-  // console.log(data)
   const book:Book= !data? []:data.books_table[0]
   const [title, setTitle] = useState(book.title);
   const [author,setAuthor] = useState(book.author)
