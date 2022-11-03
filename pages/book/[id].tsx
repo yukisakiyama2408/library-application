@@ -49,13 +49,12 @@ const BookDetail =()=>{
       </Container>
       <div>
         <div>
-      <Button variant="contained" href={`/book/${book.id}/book-update`}>
-          Update
+      <Button variant="contained">
+      <Link href="/book/[id]/book-update" as={`/book/${book.id}/book-update`} >
+        Update
+      </Link>
       </Button>
-        </div>
-      {/* //   <Link href="/book/[id]/book-update" as={`/book/${book.id}/book-update`} >
-      //   Update
-      // </Link> */}
+      </div>
       <div><BookDelete id={book.id}/></div>
       </div>
       

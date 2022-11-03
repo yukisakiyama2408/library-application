@@ -1,6 +1,7 @@
 import { gql,useQuery,useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from 'next/router';
+import { Box,TextField,Container,Grid,Button } from "@mui/material";
 
  const GET_BOOK = gql`
 query getBook($id:Int!) {
@@ -62,45 +63,59 @@ const BookUpdate =()=>{
     router.push(`/book/${book.id}`)
   }
 
-    return <div>
-      <div>{book.title}</div>
+    return (
       <div>
-        <form onSubmit={e => handleUpdateBook(e)}>
-          <input
-          type="text"
-          name="title"
-          placeholder="本のタイトル"
-          // defaultValue={book.title}
-          value={title}
-          onChange={e => (setTitle(e.target.value))}
-          />
-          <input
-          type="text"
-          placeholder="著者"
-          // defaultValue={book.author}
-          value={author}
-          onChange={e => (setAuthor(e.target.value))}
-          />
-          <input
-          type="text"
-          name="image_url"
-          // defaultValue={book.image_url}
-          placeholder="画像URL"
-          value={image_url}
-          onChange={e => (setImage_url(e.target.value))}
-          />
-          <input
-          type="text"
-          name="description"
-          // defaultValue={book.image_url}
-          placeholder="詳細"
-          value={description}
-          onChange={e => (setDescription(e.target.value))}
-          />
-          <button type="submit">更新</button>
-          </form>
+      <div>
+        <Container component="main" maxWidth="xs">
+          <Box
+          component="form"
+          onSubmit={e => handleUpdateBook(e)}
+          sx={{ mt: 1 }}
+          >
+             <h2>Update</h2>
+            <Grid container spacing={2}>
+              <Grid item xs={30}>
+              <TextField
+                type="text"
+                name="title"
+                placeholder="本のタイトル"
+                value={title}
+                onChange={e => (setTitle(e.target.value))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+                type="text"
+                placeholder="著者"
+                value={author}
+                onChange={e => (setAuthor(e.target.value))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+               type="text"
+               name="image_url"
+               placeholder="画像URL"
+               value={image_url}
+               onChange={e => (setImage_url(e.target.value))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+              <TextField
+                type="text"
+                name="description"
+                placeholder="詳細"
+                value={description}
+                onChange={e => (setDescription(e.target.value))}
+                />
+              </Grid>
+            </Grid>
+            <Button variant="contained" type="submit">更新</Button>
+          </Box>
+        </Container>
           </div>
           </div>
+    )
           }
 
 export default BookUpdate
