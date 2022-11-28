@@ -33,11 +33,11 @@ const BookIndex= ()=> {
     <div>
       <GlobalHeader/>
     </div>
-    <div className='book-index-section'>
    
-    <div>
-    {books.map((book) => (
-          <div key={book.id} className="book-card-index">
+    <Container maxWidth="sm">
+    
+      {books.map((book) => (
+      <div className='book-card-index'>
         <Card sx={{ maxWidth: 345 }}>
           <CardActionArea href={`/book/${book.id}`}>
             <CardMedia
@@ -54,14 +54,13 @@ const BookIndex= ()=> {
               </Typography>
         </CardContent>
         </CardActionArea>
-        </Card>
-      </div>
+        </Card> 
+        </div>
     ))}
-    </div>
     <div className='index-add-btn'>
       <Button variant="contained" href="/book/book-new">REGISTER</Button>
     </div>
-    </div>
+    </Container>
     </>
     )
 }
