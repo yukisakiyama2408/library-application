@@ -33,12 +33,10 @@ const BookIndex= ()=> {
     <div>
       <GlobalHeader/>
     </div>
-   
     <Container maxWidth="sm">
-    
       {books.map((book) => (
       <div className='book-card-index'>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 350 }}>
           <CardActionArea href={`/book/${book.id}`}>
             <CardMedia
             component="img"
