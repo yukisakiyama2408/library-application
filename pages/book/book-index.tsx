@@ -33,10 +33,10 @@ const BookIndex= ()=> {
     <div>
       <GlobalHeader/>
     </div>
-    <Grid container spacing={1} mt={0} justifyContent="left">
+    <Grid container spacing={4} mt={0} px={4} >
     {books.map((book) => (
       // <div className='book-card-index'>
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12} sm={6} md={4} justify-content="center">
          <Card sx={{ maxWidth: 350 }}>
           <CardActionArea href={`/book/${book.id}`}>
             <CardMedia
