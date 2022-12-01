@@ -1,7 +1,7 @@
 import { gql, useQuery} from '@apollo/client';
 import GlobalHeader from '../globalHeader';
 import Link from 'next/link';
-import { Card ,CardContent,CardActionArea,CardMedia,Typography,Container,Button,Grid,styled} from '@mui/material';
+import { Card ,CardContent,CardActionArea,CardMedia,Typography,Container,Button,Grid} from '@mui/material';
 
 
 const GET_BOOKS = gql`
@@ -33,10 +33,11 @@ const BookIndex= ()=> {
     <div>
       <GlobalHeader/>
     </div>
-    <Container maxWidth="sm">
-      {books.map((book) => (
-      <div className='book-card-index'>
-        <Card sx={{ maxWidth: 350 }}>
+    <Grid container spacing={1} mt={0} justifyContent="left">
+    {books.map((book) => (
+      // <div className='book-card-index'>
+      <Grid item xs={12} sm={6} md={4}>
+         <Card sx={{ maxWidth: 350 }}>
           <CardActionArea href={`/book/${book.id}`}>
             <CardMedia
             component="img"
@@ -53,12 +54,15 @@ const BookIndex= ()=> {
         </CardContent>
         </CardActionArea>
         </Card> 
-        </div>
+      </Grid>
+        // </div>
     ))}
+    </Grid>
+    {/* <Container maxWidth="sm"> */}
     <div className='index-add-btn'>
       <Button variant="contained" href="/book/book-new">REGISTER</Button>
     </div>
-    </Container>
+    {/* </Container> */}
     </>
     )
 }
