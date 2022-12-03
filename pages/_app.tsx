@@ -7,7 +7,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../src/theme'
 import createEmotionCache from '../src/createEmotionCache'
-
+import { Auth0Provider } from '@auth0/auth0-react'
 
 const clientSideEmotionCache = createEmotionCache();
 interface MyAppProps extends AppProps {
@@ -16,7 +16,12 @@ interface MyAppProps extends AppProps {
 
 function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps) {
   return (
-    <CacheProvider value={emotionCache}>
+    <Auth0Provider
+    domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN||""}
+    clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID||""}
+    redirectUri={`${process.env.NEXT_PUBLIC_APP_URL}/`}
+    >
+       <CacheProvider value={emotionCache}>
        <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
@@ -26,7 +31,7 @@ function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
        </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>
-   
+    </Auth0Provider>
   )
 }
 
