@@ -9,12 +9,14 @@ import theme from '../src/theme'
 import createEmotionCache from '../src/createEmotionCache'
 import { Auth0Provider } from '@auth0/auth0-react'
 
+
 const clientSideEmotionCache = createEmotionCache();
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
-function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: AppProps) {
+function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: MyAppProps) {
+ 
   return (
     <Auth0Provider
     domain="dev-95au-j9j.us.auth0.com"
@@ -27,8 +29,8 @@ function MyApp({ Component, emotionCache = clientSideEmotionCache, pageProps }: 
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
-      <ApolloProvider client={client}>  
-      <Component {...pageProps} />
+      <ApolloProvider client={client}> 
+        <Component {...pageProps} />
        </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>

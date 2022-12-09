@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.0",
+    "@apollo/client": "^3.7.1",
+    "@apollo/link-context": "^2.0.0-beta.3",
     "@apollo/react-hooks": "^4.0.0",
     "@auth0/auth0-react": "^1.12.0",
     "@emotion/react": "^11.10.5",
