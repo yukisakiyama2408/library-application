@@ -1,35 +1,55 @@
-import { createHttpLink,ApolloClient, InMemoryCache} from "@apollo/client";
+import { createHttpLink, ApolloClient, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/link-context";
-import { useAuth0 } from "@auth0/auth0-react";
+import { Auth0ContextInterface } from "@auth0/auth0-react";
 
-
-const endpointUri ="http://localhost:8080/v1/graphql"
-  const authLink = setContext((_, { headers }) => {
-    const { getAccessTokenSilently } = useAuth0();
-    const getAccessToken = async () => {
-      try {
-        return await getAccessTokenSilently();
-      } catch (error) {
-        return null;
-      }
-    };
-    // auth0から取得したJWTを取得する
-    const accessToken = getAccessToken()
-    console.log(accessToken)
+function createClient(
+  getAccessTokenSilently: Auth0ContextInterface["getAccessTokenSilently"]
+) {
+  const endpointUri = "http://localhost:8080/v1/graphql";
+  const authLink = setContext(async (_, { headers }) => {
+    const accessToken = await getAccessTokenSilently();
+    console.log(accessToken);
     return {
       headers: {
         ...headers,
-        authorization: accessToken ? `Bearer ${accessToken}` : '',
+        authorization: `Bearer ${accessToken}`,
       },
     };
   });
 
   const httpLink = createHttpLink({
     uri: endpointUri,
-  })
-  const client = new ApolloClient({
+  });
+  return new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
-  })
+    cache: new InMemoryCache(),
+  });
+}
 
-export {client};
+export { createClient };
+
+// const authLink = setContext((_, { headers }) => {
+//   console.log("aaa")
+//   const { getAccessTokenSilently } = useAuth0();
+//   console.log("bbb")
+//   const getAccessToken = async () => {
+//     return await getAccessTokenSilently();
+//   };
+//   const accessToken = getAccessToken()
+//   console.log(accessToken)
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: accessToken ? `Bearer ${accessToken}` : '',
+//     },
+//   };
+// });
+// console.log("hoge")
+// console.log(authLink)
+// const httpLink = createHttpLink({
+//   uri: endpointUri,
+// })
+// const client = new ApolloClient({
+//   link: httpLink,
+//   cache: new InMemoryCache()
+// })

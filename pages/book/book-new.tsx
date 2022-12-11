@@ -35,7 +35,7 @@ const BookInput = () => {
           setAuthor(" "),
           setImage_url(" ")
           setDescription(" ")
-        }
+        },
       });
 
     const handleAddBook = async (e: React.FormEvent<HTMLFormElement>) => {  
