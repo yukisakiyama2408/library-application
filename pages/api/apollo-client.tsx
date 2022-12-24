@@ -5,7 +5,8 @@ import { Auth0ContextInterface } from "@auth0/auth0-react";
 function createClient(
   getAccessTokenSilently: Auth0ContextInterface["getAccessTokenSilently"]
 ) {
-  const endpointUri = "http://localhost:8080/v1/graphql";
+  const endpointUri = "https://fgn-library.hasura.app/v1/graphql";
+  //  "http://localhost:8080/v1/graphql";
   const authLink = setContext(async (_, { headers }) => {
     const accessToken = await getAccessTokenSilently();
     console.log(accessToken);
