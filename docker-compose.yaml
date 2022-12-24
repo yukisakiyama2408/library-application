@@ -1,35 +1,35 @@
-version: '3.6'
-services:
-  postgres:
-    image: postgres:12
-    restart: always
-    volumes:
-    - db_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: postgrespassword
-  graphql-engine:
-    image: hasura/graphql-engine:v2.12.0
-    ports:
-    - "8080:8080"
-    depends_on:
-    - "postgres"
-    restart: always
-    environment:
-      ## postgres database to store Hasura metadata
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
-      ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
-      PG_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
-      ## enable the console served by server
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
-      ## enable debugging mode. It is recommended to disable this in production
-      HASURA_GRAPHQL_DEV_MODE: "true"
-      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
-      HASURA_GRAPHQL_ADMIN_SECRET: admin_secret
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS512", "key": "-----BEGIN CERTIFICATE-----\nMIIDDTCCAfWgAwIBAgIJSKPsd/dPP2KEMA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNV\nBAMTGWRldi05NWF1LWo5ai51cy5hdXRoMC5jb20wHhcNMjIwMzIwMDI1MDEyWhcN\nMzUxMTI3MDI1MDEyWjAkMSIwIAYDVQQDExlkZXYtOTVhdS1qOWoudXMuYXV0aDAu\nY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0R57hkI54HEVe2KI\naAkytKAGuuTSzW2iQyNbhzadPeZzHnPjyJKoCgaJ9D7pVRmi6wAgupb+Ix3aDDzh\n7U/YJCoUhxuUuwwmfFrVjurtIorM74x3ELnnWpZjuw0J/E4LeJ2y9S8Bqm1Pnz6I\n/9WFV739PR/0jroCsfwHLJGiu6fObGRxzgVi2tYYcjzc5jLOVyi4gV2uBZLOSiBp\nE5XiAPZK1IoNQR6mg44mXiGluOE9I5343Wt2d+K1TicQbWbkEjEbAB65Y/THRGb6\nm0g1T/gg8zIsVvIT16FgAJdI8lJDVHBj72nYKvP7n5VKRzaxPYT5xfJDGT+LLwyj\nXNWwvwIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR21nc0N1AF\nkH9RT4iKCt9/PGDX5zAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEB\nAJ5kQCrqQQT1jDy/7Zd8+hnLRoFhS2RgwL0cRoGAL54FX4l5TZRb8Pm7g9UIGkBT\n0IqnYUfsUVBPSTlsL8yWWUfBrXkQUqEDokQ3KtLZxAxqxl8WD1/J8La3FpeYTBuq\nt4Gp5i+9cL2WFRV0hyu3SqqMiOH/3zP4IeR7Q03IWMb/CXqWF1w74QefflppT3Ls\narFGUW7Wvtmkd+uFSs/U6VtXOSD1bRjo2mPe7GisC4I1M7SaGDPtDCxMdrne5IQ8\ndC3O40t29MxNVwNifw62MF04fcz0+YnDBdJLI5sEFQdIzUE3qbkAT4K9NY4hMBtG\nEsDJ6m9U4MGZE/9tyrSSm7Q=\n-----END CERTIFICATE-----"}'
-      ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
-      # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
-      ## uncomment next line to set an admin secret
-      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
-volumes:
-  db_data:
+# version: '3.6'
+# services:
+#   postgres:
+#     image: postgres:12
+#     restart: always
+#     volumes:
+#     - db_data:/var/lib/postgresql/data
+#     environment:
+#       POSTGRES_PASSWORD: postgrespassword
+#   graphql-engine:
+#     image: hasura/graphql-engine:v2.12.0
+#     ports:
+#     - "8080:8080"
+#     depends_on:
+#     - "postgres"
+#     restart: always
+#     environment:
+#       ## postgres database to store Hasura metadata
+#       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+#       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
+#       PG_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+#       ## enable the console served by server
+#       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+#       ## enable debugging mode. It is recommended to disable this in production
+#       HASURA_GRAPHQL_DEV_MODE: "true"
+#       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+#       HASURA_GRAPHQL_ADMIN_SECRET: admin_secret
+#       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS512", "key": "-----BEGIN CERTIFICATE-----\nMIIDDTCCAfWgAwIBAgIJSKPsd/dPP2KEMA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNV\nBAMTGWRldi05NWF1LWo5ai51cy5hdXRoMC5jb20wHhcNMjIwMzIwMDI1MDEyWhcN\nMzUxMTI3MDI1MDEyWjAkMSIwIAYDVQQDExlkZXYtOTVhdS1qOWoudXMuYXV0aDAu\nY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0R57hkI54HEVe2KI\naAkytKAGuuTSzW2iQyNbhzadPeZzHnPjyJKoCgaJ9D7pVRmi6wAgupb+Ix3aDDzh\n7U/YJCoUhxuUuwwmfFrVjurtIorM74x3ELnnWpZjuw0J/E4LeJ2y9S8Bqm1Pnz6I\n/9WFV739PR/0jroCsfwHLJGiu6fObGRxzgVi2tYYcjzc5jLOVyi4gV2uBZLOSiBp\nE5XiAPZK1IoNQR6mg44mXiGluOE9I5343Wt2d+K1TicQbWbkEjEbAB65Y/THRGb6\nm0g1T/gg8zIsVvIT16FgAJdI8lJDVHBj72nYKvP7n5VKRzaxPYT5xfJDGT+LLwyj\nXNWwvwIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR21nc0N1AF\nkH9RT4iKCt9/PGDX5zAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEB\nAJ5kQCrqQQT1jDy/7Zd8+hnLRoFhS2RgwL0cRoGAL54FX4l5TZRb8Pm7g9UIGkBT\n0IqnYUfsUVBPSTlsL8yWWUfBrXkQUqEDokQ3KtLZxAxqxl8WD1/J8La3FpeYTBuq\nt4Gp5i+9cL2WFRV0hyu3SqqMiOH/3zP4IeR7Q03IWMb/CXqWF1w74QefflppT3Ls\narFGUW7Wvtmkd+uFSs/U6VtXOSD1bRjo2mPe7GisC4I1M7SaGDPtDCxMdrne5IQ8\ndC3O40t29MxNVwNifw62MF04fcz0+YnDBdJLI5sEFQdIzUE3qbkAT4K9NY4hMBtG\nEsDJ6m9U4MGZE/9tyrSSm7Q=\n-----END CERTIFICATE-----"}'
+#       ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
+#       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
+#       ## uncomment next line to set an admin secret
+#       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+# volumes:
+#   db_data:
 
