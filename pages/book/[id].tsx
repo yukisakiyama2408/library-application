@@ -6,7 +6,7 @@ import { Container, Typography, Button, Box } from "@mui/material";
 
 const GET_BOOK = gql`
   query getBook($id: Int!) {
-    books_table(where: { id: { _eq: $id } }) {
+    books(where: { id: { _eq: $id } }) {
       id
       title
       author

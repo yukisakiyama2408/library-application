@@ -6,7 +6,6 @@ function createClient(
   getAccessTokenSilently: Auth0ContextInterface["getAccessTokenSilently"]
 ) {
   const endpointUri = "https://fgn-library.hasura.app/v1/graphql";
-  //  "http://localhost:8080/v1/graphql";
   const authLink = setContext(async (_, { headers }) => {
     const accessToken = await getAccessTokenSilently();
     console.log(accessToken);
@@ -28,29 +27,3 @@ function createClient(
 }
 
 export { createClient };
-
-// const authLink = setContext((_, { headers }) => {
-//   console.log("aaa")
-//   const { getAccessTokenSilently } = useAuth0();
-//   console.log("bbb")
-//   const getAccessToken = async () => {
-//     return await getAccessTokenSilently();
-//   };
-//   const accessToken = getAccessToken()
-//   console.log(accessToken)
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: accessToken ? `Bearer ${accessToken}` : '',
-//     },
-//   };
-// });
-// console.log("hoge")
-// console.log(authLink)
-// const httpLink = createHttpLink({
-//   uri: endpointUri,
-// })
-// const client = new ApolloClient({
-//   link: httpLink,
-//   cache: new InMemoryCache()
-// })

@@ -30,7 +30,7 @@ function MyApp({
       domain="dev-95au-j9j.us.auth0.com"
       clientId="je55u4Ols3LCJTZaKjPCdcgt1Xzh0ALN"
       redirectUri="http://localhost:3000"
-      audience="http://localhost:8080/v1/graphql"
+      audience="https://fgn-library.hasura.app/v1/graphql"
     >
       <CacheProvider value={emotionCache}>
         <Head>

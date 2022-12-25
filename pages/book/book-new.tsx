@@ -12,7 +12,7 @@ const ADD_BOOK = gql`
     $image_url: String!
     $description: String!
   ) {
-    insert_books_table(
+    insert_books(
       objects: {
         title: $title
         author: $author

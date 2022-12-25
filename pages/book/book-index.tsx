@@ -14,7 +14,7 @@ import {
 
 const GET_BOOKS = gql`
   query GetBooks {
-    books_table {
+    books {
       id
       title
       author
@@ -31,13 +31,13 @@ interface Book {
 }
 
 type Props = {
-  books_table: Array<Book>;
+  books: Array<Book>;
 };
 
 const BookIndex = () => {
   const { data } = useQuery<Props>(GET_BOOKS);
   console.log(data);
-  const books = !data ? [] : data.books_table;
+  const books = !data ? [] : data.books;
 
   return (
     <>
