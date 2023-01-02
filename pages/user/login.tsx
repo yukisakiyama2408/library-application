@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import { Button, Container, Box, Grid } from "@mui/material";
 
 const Login = () => {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
@@ -8,11 +9,15 @@ const Login = () => {
 
   return (
     <>
-      <div>
+      <div className="login_btn">
         {isAuthenticated ? (
-          <button onClick={handleLogout}>ログアウト</button>
+          <Button onClick={handleLogout} variant="contained">
+            ログアウト
+          </Button>
         ) : (
-          <button onClick={loginWithRedirect}>ログイン</button>
+          <Button onClick={loginWithRedirect} variant="contained">
+            ログイン
+          </Button>
         )}
       </div>
     </>
