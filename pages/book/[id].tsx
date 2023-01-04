@@ -31,7 +31,7 @@ const BookDetail = () => {
     variables: { id },
   });
   console.log(data);
-  const book: Book = !data ? [] : data.books_table[0];
+  const book: Book = !data ? [] : data.books[0];
   console.log(book);
 
   return (

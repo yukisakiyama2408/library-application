@@ -59,7 +59,7 @@ const BookUpdate = () => {
   const { data } = useQuery(GET_BOOK, {
     variables: { id },
   });
-  const book: Book = !data ? [] : data.books_table[0];
+  const book: Book = !data ? [] : data.books[0];
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
   const [image_url, setImage_url] = useState(book.image_url);
