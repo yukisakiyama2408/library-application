@@ -44,14 +44,21 @@ const BookInput = (items: Item) => {
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
 
-  if (items.items) {
-    useEffect(() => {
-      setTitle(items.items.title);
-      setAuthor(items.items.author[0]);
-      setImage_url(items.items.image);
-      setDescription(items.items.description);
-    });
-  }
+  const handleApibook = () => {
+    setTitle(items.items.title);
+    setAuthor(items.items.author[0]);
+    setImage_url(items.items.image);
+    setDescription(items.items.description);
+  };
+
+  // if (items.items) {
+  //   useEffect(() => {
+  //     setTitle(items.items.title);
+  //     setAuthor(items.items.author[0]);
+  //     setImage_url(items.items.image);
+  //     setDescription(items.items.description);
+  //   });
+  // }
 
   const [addBook] = useMutation(ADD_BOOK, {
     onCompleted: () => {
@@ -80,6 +87,11 @@ const BookInput = (items: Item) => {
         <div>
           <Button variant="contained" href="/book/book-index">
             Back to Home
+          </Button>
+        </div>
+        <div>
+          <Button variant="contained" onClick={handleApibook}>
+            追加{" "}
           </Button>
         </div>
         <Box component="form" onSubmit={(e) => handleAddBook(e)} sx={{ mt: 1 }}>
