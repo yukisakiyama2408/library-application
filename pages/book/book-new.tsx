@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
@@ -32,12 +32,30 @@ const ADD_BOOK = gql`
   }
 `;
 
-const BookInput = () => {
+interface Item {
+  items: { title: string; author: string; image: string; description: string };
+}
+
+const BookInput = (items: Item) => {
   const router = useRouter();
+  // const bookTitle = items.items.title;
+  // console.log(bookTitle);
+  console.log(items);
+  // console.log(items.items.isbn[1].identifier);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
+  // console.log(items.items.title);
+
+  if (items.items) {
+    useEffect(() => {
+      setTitle(items.items.title);
+      setAuthor(items.items.author[0]);
+      setImage_url(items.items.image);
+      setDescription(items.items.description);
+    });
+  }
 
   const [addBook] = useMutation(ADD_BOOK, {
     onCompleted: () => {
