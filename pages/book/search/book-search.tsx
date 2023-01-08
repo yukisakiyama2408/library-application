@@ -18,7 +18,6 @@ interface Item {
 }
 
 const BooksSearch = () => {
-  //   const { handleNewBooks, searchBooks, value, items } = useSearch();
   const [items, setItems] = useState([]);
   const [value, setValue] = useState("");
   const handleNewBooks = (event: {
@@ -35,7 +34,6 @@ const BooksSearch = () => {
     const data = await res.json();
     const dataFormat = data.items.map((item: PropsBook) => {
       const Info = item.volumeInfo;
-      // console.log(Info);
       return {
         title: Info.title,
         description: Info.description,

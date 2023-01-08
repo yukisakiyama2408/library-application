@@ -38,15 +38,11 @@ interface Item {
 
 const BookInput = (items: Item) => {
   const router = useRouter();
-  // const bookTitle = items.items.title;
-  // console.log(bookTitle);
   console.log(items);
-  // console.log(items.items.isbn[1].identifier);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
-  // console.log(items.items.title);
 
   if (items.items) {
     useEffect(() => {
