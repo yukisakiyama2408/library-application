@@ -2,6 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import BookDelete from "./[id]/book-delete";
+import BookBorrow from "./[id]/book-borrow";
 import { Container, Typography, Button, Box } from "@mui/material";
 
 const GET_BOOK = gql`
@@ -64,6 +65,9 @@ const BookDetail = () => {
         </div>
         <div>
           <BookDelete id={book.id} />
+        </div>
+        <div>
+          <BookBorrow id={book.id} />
         </div>
       </div>
     </div>
