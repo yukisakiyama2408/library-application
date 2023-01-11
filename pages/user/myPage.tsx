@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
+import BorrowedBook from "./borrowedBook";
 
 const GET_USER = gql`
   query getUser($authId: String!) {
@@ -7,6 +8,10 @@ const GET_USER = gql`
       id
       name
       company
+      borrowed_books {
+        id
+        borrowed_book_id
+      }
     }
   }
 `;
@@ -19,10 +24,20 @@ const MyPage = () => {
   });
 
   const user_info = !data ? [] : data.users_table[0];
+  // console.log(user_info);
+  // console.log(user_info && user_info.borrowed_books);
+  const borrowedBook_info = user_info.borrowed_books;
 
   return (
     <>
       <div>{user_info.name}</div>
+      {user_info.borrowed_books ? (
+        <div>
+          <BorrowedBook bookId={borrowedBook_info} />
+        </div>
+      ) : (
+        <div>借りている本はありません</div>
+      )}
     </>
   );
 };

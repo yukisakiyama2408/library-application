@@ -26,7 +26,10 @@ interface Book {
   author: string;
   image_url: string;
   description: string;
-  borrowed_books: any;
+  borrowed_books: {
+    id: number;
+    borrowed_book_id: number;
+  };
 }
 
 const BookDetail = () => {
@@ -38,7 +41,7 @@ const BookDetail = () => {
   // console.log(data);
   const book: Book = !data ? [] : data.books[0];
   // console.log(book);
-  const borrowBook = book.borrowed_books && book.borrowed_books[0];
+  const borrowBook = book.borrowed_books && book.borrowed_books;
   // console.log(borrowBook.id);
 
   return (
