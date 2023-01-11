@@ -10,32 +10,25 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-const DELETE_BOOK = gql`
-  mutation deleteBook($id: Int!) {
-    delete_books(where: { id: { _eq: $id } }) {
+const RETURN_BOOK = gql`
+  mutation returnBook($borrowed_book_id: Int!) {
+    delete_borrowed_books(
+      where: { borrowed_book_id: { _eq: $borrowed_book_id } }
+    ) {
       affected_rows
     }
   }
 `;
 
-type Id = {
-  id: number;
+type BookId = {
+  bookId: string;
 };
 
-const BookDelete: React.FC<Id> = ({ id }) => {
+const ReturnBook: React.FC<BookId> = ({ bookId }) => {
   const router = useRouter();
-  const [deleteBook] = useMutation(DELETE_BOOK, {
+  const [returnBook] = useMutation(RETURN_BOOK, {
     refetchQueries: ["GetBooks"],
   });
-  // const id = router.query.id
-  // console.log(id);
-  const handleDeleteBook = () => {
-    deleteBook({
-      variables: { id: id },
-    });
-    router.push("/user/myPage");
-  };
-
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -45,12 +38,18 @@ const BookDelete: React.FC<Id> = ({ id }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleReturnBook = () => {
+    returnBook({
+      variables: { borrowed_book_id: bookId },
+    });
+    router.push("/book/book-index");
+  };
 
   return (
     <div>
       <div>
         <Button variant="contained" onClick={handleClickOpen}>
-          削除
+          返却する
         </Button>
         <Dialog
           open={open}
@@ -59,18 +58,18 @@ const BookDelete: React.FC<Id> = ({ id }) => {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"本当に削除しますか?"}
+            {"本当に返却しますか?"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              「削除する」を押すとこの書籍情報は削除されます。削除後は情報を復元することができないため、ご注意ください。
+              本棚に綺麗に収納されていますか？
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleDeleteBook} autoFocus>
-              削除する
+            <Button onClick={handleReturnBook} autoFocus>
+              返却する
             </Button>
-            <Button onClick={handleClose}>削除しない</Button>
+            <Button onClick={handleClose}>返却しない</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -79,4 +78,4 @@ const BookDelete: React.FC<Id> = ({ id }) => {
   );
 };
 
-export default BookDelete;
+export default ReturnBook;

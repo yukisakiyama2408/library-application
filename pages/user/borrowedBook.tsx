@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import ReturnBook from "./returnBook";
 import {
   Card,
   CardContent,
@@ -84,6 +85,9 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                   </Typography>
                 </CardContent>
               </CardActionArea>
+              <div>
+                <ReturnBook bookId={book.id} />
+              </div>
             </Card>
           </Grid>
         ))}
