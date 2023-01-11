@@ -28,7 +28,7 @@ const BookDelete: React.FC<Id> = ({ id }) => {
     refetchQueries: ["GetBooks"],
   });
   // const id = router.query.id
-  console.log(id);
+  // console.log(id);
   const handleDeleteBook = () => {
     deleteBook({
       variables: { id: id },

@@ -13,6 +13,9 @@ const GET_BOOK = gql`
       author
       image_url
       description
+      borrowed_books {
+        id
+      }
     }
   }
 `;
@@ -23,6 +26,7 @@ interface Book {
   author: string;
   image_url: string;
   description: string;
+  borrowed_books: any;
 }
 
 const BookDetail = () => {
@@ -31,9 +35,11 @@ const BookDetail = () => {
   const { data } = useQuery(GET_BOOK, {
     variables: { id },
   });
-  console.log(data);
+  // console.log(data);
   const book: Book = !data ? [] : data.books[0];
-  console.log(book);
+  // console.log(book);
+  const borrowBook = book.borrowed_books && book.borrowed_books[0];
+  // console.log(borrowBook.id);
 
   return (
     <div>
@@ -66,9 +72,13 @@ const BookDetail = () => {
         <div>
           <BookDelete id={book.id} />
         </div>
-        <div>
-          <BookBorrow id={book.id} />
-        </div>
+        {borrowBook ? (
+          <div>貸出中</div>
+        ) : (
+          <div>
+            <BookBorrow id={book.id} />
+          </div>
+        )}
       </div>
     </div>
   );

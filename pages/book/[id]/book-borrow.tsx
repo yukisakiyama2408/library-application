@@ -45,18 +45,12 @@ type BookId = {
 
 const BookBorrow: React.FC<BookId> = ({ id }) => {
   const { user } = useAuth0();
-  console.log(user);
-  if (user) {
-    console.log(user.sub);
-  }
 
   const { data } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
   });
 
-  console.log(data);
   const user_info = !data ? [] : data.users_table[0];
-  console.log(user_info);
 
   const [borrowBook] = useMutation(BORROW_BOOK, {
     refetchQueries: ["GetBooks"],
