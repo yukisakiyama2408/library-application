@@ -42,7 +42,7 @@ const ReturnBook: React.FC<BookId> = ({ bookId }) => {
     returnBook({
       variables: { borrowed_book_id: bookId },
     });
-    router.push("/book/book-index");
+    router.push("/user/myPage");
   };
 
   return (

@@ -27,10 +27,16 @@ interface Book {
   image_url: string;
   description: string;
   borrowed_books: {
+    map: any;
     id: number;
     borrowed_book_id: number;
   };
 }
+
+type BorrowBook = {
+  id: number;
+  borrowed_book_id: number;
+};
 
 const BookDetail = () => {
   const router = useRouter();
@@ -40,8 +46,10 @@ const BookDetail = () => {
   });
   // console.log(data);
   const book: Book = !data ? [] : data.books[0];
-  // console.log(book);
-  const borrowBook = book.borrowed_books && book.borrowed_books;
+  console.log(book);
+  const borrowBook =
+    book.borrowed_books &&
+    book.borrowed_books.map((borrowed_book: BorrowBook) => borrowed_book.id);
   // console.log(borrowBook.id);
 
   return (

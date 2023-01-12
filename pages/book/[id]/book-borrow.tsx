@@ -1,6 +1,7 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from "next/router";
 import {
   Button,
   Dialog,
@@ -45,20 +46,19 @@ type BookId = {
 
 const BookBorrow: React.FC<BookId> = ({ id }) => {
   const { user } = useAuth0();
-
+  const router = useRouter();
   const { data } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
   });
 
   const user_info = !data ? [] : data.users_table[0];
 
-  const [borrowBook] = useMutation(BORROW_BOOK, {
-    refetchQueries: ["GetBooks"],
-  });
+  const [borrowBook] = useMutation(BORROW_BOOK);
   const handleBorrowBook = () => {
     borrowBook({
       variables: { borrowed_book_id: id, borrowing_user_id: user_info.id },
     });
+    router.push("/user/myPage");
   };
 
   const [open, setOpen] = useState(false);
