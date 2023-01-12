@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useAuth0 } from "@auth0/auth0-react";
-import { sign } from "crypto";
 
 const GlobalHeader = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -68,7 +67,7 @@ const GlobalHeader = () => {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem>My account</MenuItem>
               <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>
           </div>
