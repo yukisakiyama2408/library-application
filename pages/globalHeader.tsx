@@ -10,8 +10,10 @@ import {
 } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from "next/router";
 
 const GlobalHeader = () => {
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -24,6 +26,10 @@ const GlobalHeader = () => {
 
   const signOut = () => {
     logout();
+  };
+
+  const goToProfile = () => {
+    router.push("/user/myPage");
   };
 
   return (
@@ -67,7 +73,7 @@ const GlobalHeader = () => {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem>My account</MenuItem>
+              <MenuItem onClick={goToProfile}>My account</MenuItem>
               <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>
           </div>

@@ -58,7 +58,7 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
 
   return (
     <>
-      {books ? (
+      {borrowedBookIds && borrowedBookIds.length > 0 ? (
         <Grid container spacing={4} mt={0} px={4}>
           {books.map((book) => (
             <Grid
