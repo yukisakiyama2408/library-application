@@ -27,7 +27,7 @@ type BookId = {
 const ReturnBook: React.FC<BookId> = ({ bookId }) => {
   const router = useRouter();
   const [returnBook] = useMutation(RETURN_BOOK, {
-    refetchQueries: ["GetBooks"],
+    refetchQueries: ["getBorrowedBook"],
   });
   const [open, setOpen] = useState(false);
 

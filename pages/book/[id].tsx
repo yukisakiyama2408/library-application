@@ -29,7 +29,6 @@ interface Book {
   borrowed_books: {
     map: any;
     id: number;
-    borrowed_book_id: number;
   };
 }
 
@@ -50,7 +49,7 @@ const BookDetail = () => {
   const borrowBook =
     book.borrowed_books &&
     book.borrowed_books.map((borrowed_book: BorrowBook) => borrowed_book.id);
-  // console.log(borrowBook.id);
+  console.log(borrowBook);
 
   return (
     <div>
@@ -83,7 +82,7 @@ const BookDetail = () => {
         <div>
           <BookDelete id={book.id} />
         </div>
-        {borrowBook ? (
+        {borrowBook && borrowBook.length > 0 ? (
           <div>貸出中</div>
         ) : (
           <div>

@@ -24,20 +24,17 @@ const MyPage = () => {
   });
 
   const user_info = !data ? [] : data.users_table[0];
-  // console.log(user_info);
-  // console.log(user_info && user_info.borrowed_books);
+  const borrowBook =
+    user_info.borrowed_books &&
+    user_info.borrowed_books.map((borrowed_book: any) => borrowed_book.id);
   const borrowedBook_info = user_info.borrowed_books;
 
   return (
     <>
       <div>{user_info.name}</div>
-      {user_info.borrowed_books ? (
-        <div>
-          <BorrowedBook bookId={borrowedBook_info} />
-        </div>
-      ) : (
-        <div>借りている本はありません</div>
-      )}
+      <div>
+        <BorrowedBook bookId={borrowedBook_info} />
+      </div>
     </>
   );
 };
