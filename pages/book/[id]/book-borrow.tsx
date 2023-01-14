@@ -30,6 +30,25 @@ const BORROW_BOOK = gql`
   }
 `;
 
+const ADD_BOOK_HISTORY = gql`
+  mutation ($borrowed_book_id: Int!, $borrowing_user_id: Int!) {
+    insert_borrowed_book_history(
+      objects: {
+        borrowed_book_id: $borrowed_book_id
+        borrowing_user_id: $borrowing_user_id
+      }
+    ) {
+      affected_rows
+      returning {
+        id
+        borrowed_book_id
+        borrowing_user_id
+        borrowed_date
+      }
+    }
+  }
+`;
+
 const GET_USER = gql`
   query getUser($authId: String!) {
     users_table(where: { authId: { _eq: $authId } }) {
@@ -58,6 +77,20 @@ const BookBorrow: React.FC<BookId> = ({ id }) => {
     borrowBook({
       variables: { borrowed_book_id: id, borrowing_user_id: user_info.id },
     });
+    // router.push("/user/myPage");
+  };
+
+  const [add_book_history] = useMutation(ADD_BOOK_HISTORY);
+
+  const addBookHistory = () => {
+    add_book_history({
+      variables: { borrowed_book_id: id, borrowing_user_id: user_info.id },
+    });
+  };
+
+  const borrowAction = () => {
+    handleBorrowBook();
+    addBookHistory();
     router.push("/user/myPage");
   };
 
@@ -91,7 +124,7 @@ const BookBorrow: React.FC<BookId> = ({ id }) => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleBorrowBook} autoFocus>
+            <Button onClick={borrowAction} autoFocus>
               借りる
             </Button>
             <Button onClick={handleClose}>借りない</Button>

@@ -45,16 +45,13 @@ type BookIds = {
 };
 
 const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
-  //   console.log(bookId);
   const borrowedBookIds =
     bookId && bookId.map((bookid) => bookid.borrowed_book_id);
-  console.log(borrowedBookIds);
   const { data } = useQuery<Props>(GET_BORROWED_BOOK, {
     variables: { id: borrowedBookIds },
   });
 
   const books = !data ? [] : data.books;
-  console.log(books);
 
   return (
     <>

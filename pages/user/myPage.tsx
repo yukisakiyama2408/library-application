@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
 import BorrowedBook from "./borrowedBook";
+import BorrowedBookHitory from "./borrowedBookHistory";
 
 const GET_USER = gql`
   query getUser($authId: String!) {
@@ -24,6 +25,7 @@ const MyPage = () => {
   });
 
   const user_info = !data ? [] : data.users_table[0];
+  console.log(user_info);
   const borrowBook =
     user_info.borrowed_books &&
     user_info.borrowed_books.map((borrowed_book: any) => borrowed_book.id);
@@ -33,7 +35,14 @@ const MyPage = () => {
     <>
       <div>{user_info.name}</div>
       <div>
-        <BorrowedBook bookId={borrowedBook_info} />
+        <div>
+          <div>現在借りている本</div>
+          <BorrowedBook bookId={borrowedBook_info} />
+        </div>
+        <div>
+          <div>過去に読んだ本</div>
+          <BorrowedBookHitory bookId={borrowedBook_info} />
+        </div>
       </div>
     </>
   );
