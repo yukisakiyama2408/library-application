@@ -43,13 +43,11 @@ const BookDetail = () => {
   const { data } = useQuery(GET_BOOK, {
     variables: { id },
   });
-  // console.log(data);
   const book: Book = !data ? [] : data.books[0];
   console.log(book);
   const borrowBook =
     book.borrowed_books &&
     book.borrowed_books.map((borrowed_book: BorrowBook) => borrowed_book.id);
-  console.log(borrowBook);
 
   return (
     <div>

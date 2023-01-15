@@ -4,13 +4,14 @@ import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
 
 const GET_BOOK = gql`
-  query getBook($id: Int!) {
-    books_table(where: { id: { _eq: $id } }) {
+  query GetBooks($id: Int!) {
+    books(where: { id: { _eq: $id } }) {
       id
       title
       author
       image_url
       description
+      isbn
     }
   }
 `;
@@ -22,6 +23,7 @@ const UPDATE_BOOK = gql`
     $author: String!
     $image_url: String!
     $description: String!
+    $isbn: String!
   ) {
     update_books(
       where: { id: { _eq: $id } }
@@ -30,6 +32,7 @@ const UPDATE_BOOK = gql`
         author: $author
         image_url: $image_url
         description: $description
+        isbn: $isbn
       }
     ) {
       affected_rows
@@ -39,6 +42,7 @@ const UPDATE_BOOK = gql`
         author
         image_url
         description
+        isbn
       }
     }
   }
@@ -50,24 +54,36 @@ interface Book {
   author: string;
   image_url: string;
   description: string;
+  isbn: string;
 }
 
 const BookUpdate = () => {
   const router = useRouter();
   const id = router.query.id;
-  // console.log(id)
   const { data } = useQuery(GET_BOOK, {
     variables: { id },
   });
+  // console.log(data);
+
   const book: Book = !data ? [] : data.books[0];
+  console.log(book);
+  const handleInfobook = () => {
+    setTitle(book.title);
+    setAuthor(book.author);
+    setImage_url(book.image_url);
+    setDescription(book.description);
+    setIsbn(book.isbn);
+  };
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
-  const [image_url, setImage_url] = useState(book.image_url);
+  const [image_url, setImage_url] = useState(book && book.image_url);
   const [description, setDescription] = useState(book.description);
+  const [isbn, setIsbn] = useState(book.isbn);
   const [updateBook] = useMutation(UPDATE_BOOK, {
     onCompleted: () => {
       setTitle(" "), setAuthor(" "), setImage_url(" ");
       setDescription(" ");
+      setIsbn(" ");
     },
   });
   const handleUpdateBook = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -79,6 +95,7 @@ const BookUpdate = () => {
         author: author,
         image_url: image_url,
         description: description,
+        isbn: isbn,
       },
     });
     router.push(`/book/${book.id}`);
@@ -94,6 +111,11 @@ const BookUpdate = () => {
             sx={{ mt: 1 }}
           >
             <h2>Update</h2>
+            <div>
+              <Button variant="contained" onClick={handleInfobook}>
+                追加{" "}
+              </Button>
+            </div>
             <Grid container spacing={2}>
               <Grid item xs={30}>
                 <TextField
@@ -128,6 +150,15 @@ const BookUpdate = () => {
                   placeholder="詳細"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="text"
+                  name="isbn"
+                  placeholder="ISBN"
+                  value={isbn}
+                  onChange={(e) => setIsbn(e.target.value)}
                 />
               </Grid>
             </Grid>
