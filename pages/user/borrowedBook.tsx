@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import ReturnBook from "./returnBook";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
-
+import { formatInTimeZone } from "date-fns-tz";
 const GET_BORROWED_BOOK = gql`
   query getBorrowedBook($id: [Int!]) {
     books(where: { id: { _in: $id } }) {
@@ -85,8 +85,15 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                     {book.author}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {book.borrowed_books.map(
-                      (item: { date: Date }) => item.date
+                    返却期限：
+                    {formatInTimeZone(
+                      new Date(
+                        book.borrowed_books.map(
+                          (item: { date: Date }) => item.date
+                        )
+                      ),
+                      "JST",
+                      "yyyy年MM月dd日"
                     )}
                   </Typography>
                 </CardContent>
