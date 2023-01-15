@@ -61,6 +61,7 @@ const BookIndex = () => {
                   height="500"
                   image={book.image_url}
                   alt="本の表紙"
+                  sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h6" component="div">
