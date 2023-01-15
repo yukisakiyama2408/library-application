@@ -24,6 +24,7 @@ interface Book {
   image_url: string;
   description: string;
   borrowed_books: {
+    map: any;
     date: string;
   };
 }
@@ -82,6 +83,11 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {book.author}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {book.borrowed_books.map(
+                      (item: { date: Date }) => item.date
+                    )}
                   </Typography>
                 </CardContent>
                 <div>
