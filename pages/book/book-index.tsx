@@ -54,7 +54,7 @@ const BookIndex = () => {
             justify-content="center"
             key={book.id}
           >
-            <Card sx={{ maxWidth: 350 }}>
+            <Card sx={{ maxWidth: 450 }}>
               <CardActionArea href={`/book/${book.id}`}>
                 <CardMedia
                   component="img"
@@ -78,7 +78,7 @@ const BookIndex = () => {
       </Grid>
       {/* <Container maxWidth="sm"> */}
       <div className="index-add-btn">
-        <Button variant="contained" href="/book/book-new">
+        <Button variant="contained" href="/book/search/book-search">
           REGISTER
         </Button>
       </div>

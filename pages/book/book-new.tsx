@@ -11,6 +11,7 @@ const ADD_BOOK = gql`
     $author: String!
     $image_url: String!
     $description: String!
+    $isbn: String!
   ) {
     insert_books(
       objects: {
@@ -18,6 +19,7 @@ const ADD_BOOK = gql`
         author: $author
         image_url: $image_url
         description: $description
+        isbn: $isbn
       }
     ) {
       affected_rows
@@ -27,13 +29,20 @@ const ADD_BOOK = gql`
         author
         image_url
         description
+        isbn
       }
     }
   }
 `;
 
 interface Item {
-  items: { title: string; author: string; image: string; description: string };
+  items: {
+    title: string;
+    author: string;
+    image: string;
+    description: string;
+    isbn: string;
+  };
 }
 
 const BookInput = (items: Item) => {
@@ -43,18 +52,25 @@ const BookInput = (items: Item) => {
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
+  const [isbn, setIsbn] = useState("");
+
+  const ISBN = items.items && items.items.isbn;
 
   const handleApibook = () => {
     setTitle(items.items.title);
     setAuthor(items.items.author);
     setImage_url(items.items.image);
     setDescription(items.items.description);
+    setIsbn(ISBN[1].identifier);
   };
+
+  // console.log(items.items.isbn[1]);
 
   const [addBook] = useMutation(ADD_BOOK, {
     onCompleted: () => {
       setTitle(" "), setAuthor(" "), setImage_url(" ");
       setDescription(" ");
+      setIsbn("");
     },
   });
 
@@ -66,8 +82,8 @@ const BookInput = (items: Item) => {
         author: author,
         image_url: image_url,
         description: description,
+        isbn: isbn,
       },
-      // refetchQueries: [{ query: GET_BOOKS }]
     });
     router.push("/book/book-index");
   };
@@ -120,6 +136,15 @@ const BookInput = (items: Item) => {
                 placeholder="詳細"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                name="isbn"
+                placeholder="ISBN"
+                value={isbn}
+                onChange={(e) => setIsbn(e.target.value)}
               />
             </Grid>
           </Grid>

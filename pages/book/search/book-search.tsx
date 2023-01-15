@@ -5,7 +5,13 @@ import BookInput from "../book-new";
 
 interface GoogleBook {
   volumeInfo: any;
-  items: { title: string; author: string; image: string; description: string };
+  items: {
+    title: string;
+    author: string;
+    image: string;
+    description: string;
+    isbn: string;
+  };
 }
 
 type PropsBook = {
@@ -14,7 +20,14 @@ type PropsBook = {
 };
 
 interface Item {
-  items: { title: string; author: string; image: string; description: string };
+  volumeInfo: any;
+  items: {
+    title: string;
+    author: string;
+    image: string;
+    description: string;
+    isbn: string;
+  };
 }
 
 const BooksSearch = () => {
@@ -32,7 +45,7 @@ const BooksSearch = () => {
     const endpoint = "https://www.googleapis.com/books/v1";
     const res = await fetch(`${endpoint}/volumes?q=${value}`);
     const data = await res.json();
-    const dataFormat = data.items.map((item: PropsBook) => {
+    const dataFormat = data.items.map((item: Item) => {
       const Info = item.volumeInfo;
       return {
         title: Info.title,
@@ -43,7 +56,7 @@ const BooksSearch = () => {
         image: Info.imageLinks ? Info.imageLinks.smallThumbnail : "",
       };
     });
-    console.log(dataFormat);
+    // console.log(dataFormat);
     setItems(dataFormat[0]);
   };
 
