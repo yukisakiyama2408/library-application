@@ -8,7 +8,6 @@ const GET_USER = gql`
     users_table(where: { authId: { _eq: $authId } }) {
       id
       name
-      company
       borrowed_books {
         id
         borrowed_book_id
@@ -19,17 +18,14 @@ const GET_USER = gql`
 
 const MyPage = () => {
   const { user } = useAuth0();
-
   const { data } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
   });
 
   const user_info = !data ? [] : data.users_table[0];
-  console.log(user_info);
-  const borrowBook =
-    user_info.borrowed_books &&
-    user_info.borrowed_books.map((borrowed_book: any) => borrowed_book.id);
+  console.log(data);
   const borrowedBook_info = user_info.borrowed_books;
+  console.log(borrowedBook_info);
 
   return (
     <>

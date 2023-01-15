@@ -1,15 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import ReturnBook from "./returnBook";
-import {
-  Card,
-  CardContent,
-  CardActionArea,
-  CardMedia,
-  Typography,
-  Container,
-  Button,
-  Grid,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 
 const GET_BORROWED_BOOK = gql`
   query getBorrowedBook($id: [Int!]) {
@@ -19,6 +10,9 @@ const GET_BORROWED_BOOK = gql`
       author
       image_url
       description
+      borrowed_books {
+        date
+      }
     }
   }
 `;
@@ -29,6 +23,9 @@ interface Book {
   author: string;
   image_url: string;
   description: string;
+  borrowed_books: {
+    date: string;
+  };
 }
 
 type Props = {
@@ -52,6 +49,12 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
   });
 
   const books = !data ? [] : data.books;
+  console.log(books);
+  const book_infos = books && books.map((book) => book.borrowed_books);
+  console.log(book_infos);
+  const book_dates =
+    book_infos && book_infos.map((book_info) => book_info.date);
+  console.log(book_dates);
 
   return (
     <>
@@ -67,22 +70,20 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
               key={book.id}
             >
               <Card sx={{ maxWidth: 350 }}>
-                <CardActionArea href={`/book/${book.id}`}>
-                  <CardMedia
-                    component="img"
-                    height="500"
-                    image={book.image_url}
-                    alt="本の表紙"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
-                      {book.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {book.author}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="500"
+                  image={book.image_url}
+                  alt="本の表紙"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {book.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {book.author}
+                  </Typography>
+                </CardContent>
                 <div>
                   <ReturnBook bookId={book.id} />
                 </div>
