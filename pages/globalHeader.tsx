@@ -43,7 +43,7 @@ const GlobalHeader = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           ></IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="a" href="/" sx={{ flexGrow: 1 }}>
             FGN Books
           </Typography>
           <div>
