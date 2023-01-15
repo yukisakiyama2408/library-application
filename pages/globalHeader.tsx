@@ -72,7 +72,6 @@ const GlobalHeader = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
               <MenuItem onClick={goToProfile}>My account</MenuItem>
               <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>

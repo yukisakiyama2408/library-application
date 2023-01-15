@@ -2,6 +2,8 @@ import { gql, useQuery } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
 import BorrowedBook from "./borrowedBook";
 import BorrowedBookHitory from "./borrowedBookHistory";
+import GlobalHeader from "../globalHeader";
+import { Typography, Divider, Container } from "@mui/material";
 
 const GET_USER = gql`
   query getUser($authId: String!) {
@@ -23,23 +25,36 @@ const MyPage = () => {
   });
 
   const user_info = !data ? [] : data.users_table[0];
-  console.log(data);
   const borrowedBook_info = user_info.borrowed_books;
   console.log(borrowedBook_info);
 
   return (
     <>
-      <div>{user_info.name}</div>
       <div>
-        <div>
-          <div>現在借りている本</div>
-          <BorrowedBook bookId={borrowedBook_info} />
-        </div>
-        <div>
-          <div>過去に読んだ本</div>
-          <BorrowedBookHitory bookId={borrowedBook_info} />
-        </div>
+        <GlobalHeader />
       </div>
+      <Container>
+        <Typography gutterBottom variant="h5" component="div">
+          {user_info.name}さんのホーム
+        </Typography>
+        <div>
+          <div>
+            <Typography gutterBottom variant="h6" component="div">
+              現在借りている本
+            </Typography>
+            <Divider />
+
+            <BorrowedBook bookId={borrowedBook_info} />
+          </div>
+          <div>
+            <Typography gutterBottom variant="h6" component="div">
+              過去に読んだ本
+            </Typography>
+            <Divider />
+            <BorrowedBookHitory bookId={borrowedBook_info} />
+          </div>
+        </div>
+      </Container>
     </>
   );
 };
