@@ -85,9 +85,6 @@ const BorrowedBookHitory: React.FC<BookIds> = ({ bookId }) => {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <div>
-                <ReturnBook bookId={book.id} />
-              </div>
             </Card>
           </Grid>
         ))}
