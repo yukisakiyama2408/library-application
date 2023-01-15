@@ -58,7 +58,7 @@ const BookIndex = () => {
               <CardActionArea href={`/book/${book.id}`}>
                 <CardMedia
                   component="img"
-                  height="500"
+                  height="400"
                   image={book.image_url}
                   alt="本の表紙"
                   sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
