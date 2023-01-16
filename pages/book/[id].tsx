@@ -3,7 +3,15 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import BookDelete from "./[id]/book-delete";
 import BookBorrow from "./[id]/book-borrow";
-import { Container, Typography, Button, Box } from "@mui/material";
+import GlobalHeader from "../globalHeader";
+import {
+  Container,
+  Typography,
+  Button,
+  Box,
+  Card,
+  CardMedia,
+} from "@mui/material";
 
 const GET_BOOK = gql`
   query getBook($id: Int!) {
@@ -52,13 +60,20 @@ const BookDetail = () => {
   return (
     <div>
       <div>
-        <Button variant="contained" href="/book/book-index">
-          Back to Home
-        </Button>
+        <GlobalHeader />
       </div>
       <Container>
         <div className="image-section">
-          <img src={book.image_url} alt="book cover image" />
+          <Card sx={{ maxWidth: 450 }}>
+            <CardMedia
+              component="img"
+              height="400"
+              image={book.image_url}
+              alt="本の表紙"
+              sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+            />
+          </Card>
+          {/* <img src={book.image_url} alt="book cover image" /> */}
         </div>
         <div className="info-section">
           <h2> {book.title}</h2>
