@@ -56,15 +56,15 @@ const BookInput = (items: Item) => {
 
   const ISBN = items.items && items.items.isbn;
 
-  const handleApibook = () => {
+  console.log(ISBN);
+
+  useEffect(() => {
     setTitle(items.items.title);
     setAuthor(items.items.author);
     setImage_url(items.items.image);
     setDescription(items.items.description);
-    setIsbn(ISBN[1].identifier);
-  };
-
-  // console.log(items.items.isbn[1]);
+    setIsbn(ISBN && ISBN[1].identifier);
+  }, [items]);
 
   const [addBook] = useMutation(ADD_BOOK, {
     onCompleted: () => {
@@ -96,11 +96,7 @@ const BookInput = (items: Item) => {
             Back to Home
           </Button>
         </div>
-        <div>
-          <Button variant="contained" onClick={handleApibook}>
-            追加{" "}
-          </Button>
-        </div>
+
         <Box component="form" onSubmit={(e) => handleAddBook(e)} sx={{ mt: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
