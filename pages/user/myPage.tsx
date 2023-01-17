@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
-import BorrowedBook from "./borrowedBook";
-import BorrowedBookHitory from "./borrowedBookHistory";
+import BorrowedBook from "../../components/borrowedBook";
+import BorrowedBookHitory from "../../components/borrowedBookHistory";
 import GlobalHeader from "../globalHeader";
 import { Typography, Divider, Container } from "@mui/material";
 
