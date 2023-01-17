@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
 import BookDelete from "./[id]/book-delete";
 import BookBorrow from "./[id]/book-borrow";
@@ -24,6 +25,15 @@ const GET_BOOK = gql`
       borrowed_books {
         id
       }
+    }
+  }
+`;
+
+const GET_USER = gql`
+  query getUser($authId: String!) {
+    users_table(where: { authId: { _eq: $authId } }) {
+      id
+      name
     }
   }
 `;
@@ -57,6 +67,16 @@ const BookDetail = () => {
     book.borrowed_books &&
     book.borrowed_books.map((borrowed_book: BorrowBook) => borrowed_book.id);
 
+  const { user } = useAuth0();
+  const { data: data2 } = useQuery(GET_USER, {
+    variables: { authId: user && user.sub },
+  });
+  console.log(data2);
+  const user_info = !data2 ? [] : data2.users_table[0];
+  console.log(user_info);
+  console.log(user_info.id);
+  const borrowingUser = user_info && user_info.id;
+
   return (
     <div>
       <div>
@@ -73,7 +93,6 @@ const BookDetail = () => {
               sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
             />
           </Card>
-          {/* <img src={book.image_url} alt="book cover image" /> */}
         </div>
         <div className="info-section">
           <h2> {book.title}</h2>
@@ -99,7 +118,7 @@ const BookDetail = () => {
           <div>貸出中</div>
         ) : (
           <div>
-            <BookBorrow id={book.id} />
+            <BookBorrow id={book.id} borrowingUser={borrowingUser} />
           </div>
         )}
       </div>

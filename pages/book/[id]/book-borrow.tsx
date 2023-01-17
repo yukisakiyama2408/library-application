@@ -49,42 +49,26 @@ const ADD_BOOK_HISTORY = gql`
   }
 `;
 
-const GET_USER = gql`
-  query getUser($authId: String!) {
-    users_table(where: { authId: { _eq: $authId } }) {
-      id
-      name
-      company
-    }
-  }
-`;
-
 type BookId = {
   id: number;
+  borrowingUser: number;
 };
 
-const BookBorrow: React.FC<BookId> = ({ id }) => {
-  const { user } = useAuth0();
+const BookBorrow: React.FC<BookId> = ({ id, borrowingUser }) => {
   const router = useRouter();
-  const { data } = useQuery(GET_USER, {
-    variables: { authId: user && user.sub },
-  });
-
-  const user_info = !data ? [] : data.users_table[0];
 
   const [borrowBook] = useMutation(BORROW_BOOK);
   const handleBorrowBook = () => {
     borrowBook({
-      variables: { borrowed_book_id: id, borrowing_user_id: user_info.id },
+      variables: { borrowed_book_id: id, borrowing_user_id: borrowingUser },
     });
-    // router.push("/user/myPage");
   };
 
   const [add_book_history] = useMutation(ADD_BOOK_HISTORY);
 
   const addBookHistory = () => {
     add_book_history({
-      variables: { borrowed_book_id: id, borrowing_user_id: user_info.id },
+      variables: { borrowed_book_id: id, borrowing_user_id: borrowingUser },
     });
   };
 
