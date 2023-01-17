@@ -1,5 +1,5 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
 
@@ -67,13 +67,14 @@ const BookUpdate = () => {
 
   const book: Book = !data ? [] : data.books[0];
   console.log(book);
-  const handleInfobook = () => {
+  useEffect(() => {
     setTitle(book.title);
     setAuthor(book.author);
     setImage_url(book.image_url);
     setDescription(book.description);
     setIsbn(book.isbn);
-  };
+  }, [book]);
+
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
   const [image_url, setImage_url] = useState(book && book.image_url);
@@ -111,11 +112,11 @@ const BookUpdate = () => {
             sx={{ mt: 1 }}
           >
             <h2>Update</h2>
-            <div>
+            {/* <div>
               <Button variant="contained" onClick={handleInfobook}>
                 追加{" "}
               </Button>
-            </div>
+            </div> */}
             <Grid container spacing={2}>
               <Grid item xs={30}>
                 <TextField
