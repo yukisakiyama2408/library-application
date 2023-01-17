@@ -4,6 +4,7 @@ import BorrowedBook from "../../components/borrowedBook";
 import BorrowedBookHitory from "../../components/borrowedBookHistory";
 import GlobalHeader from "../../components/globalHeader";
 import { Typography, Divider, Container } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
 const GET_USER = gql`
   query getUser($authId: String!) {
@@ -39,16 +40,22 @@ const MyPage = () => {
         <GlobalHeader />
       </div>
       <Container>
-        <Typography gutterBottom variant="h5" component="div">
-          {user_info.name}さんのホーム
-        </Typography>
+        <div>
+          {" "}
+          <Typography gutterBottom variant="h5" component="div">
+            {user_info.name}さんのホーム
+          </Typography>
+          <a href="/user/profileEdit">
+            <EditIcon />
+          </a>
+        </div>
+
         <div>
           <div>
             <Typography gutterBottom variant="h6" component="div">
               現在借りている本
             </Typography>
             <Divider />
-
             <BorrowedBook bookId={borrowedBook_info} />
           </div>
           <div>
