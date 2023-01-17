@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
 import BookDelete from "./[id]/book-delete";
 import BookBorrow from "./[id]/book-borrow";
-import GlobalHeader from "../globalHeader";
+import GlobalHeader from "../../components/globalHeader";
 import {
   Container,
   Typography,

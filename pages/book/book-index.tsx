@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import GlobalHeader from "../globalHeader";
+import GlobalHeader from "../../components/globalHeader";
 import Link from "next/link";
 import {
   Card,

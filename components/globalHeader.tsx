@@ -72,7 +72,16 @@ const GlobalHeader = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={goToProfile}>My account</MenuItem>
+              <MenuItem>
+                <Typography
+                  // variant="body"
+                  component="a"
+                  href="/user/myPage"
+                  sx={{ flexGrow: 1 }}
+                >
+                  My page
+                </Typography>
+              </MenuItem>
               <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>
           </div>
