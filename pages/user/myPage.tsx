@@ -14,6 +14,10 @@ const GET_USER = gql`
         id
         borrowed_book_id
       }
+      borrowed_book_history {
+        id
+        borrowed_book_id
+      }
     }
   }
 `;
@@ -26,7 +30,9 @@ const MyPage = () => {
 
   const user_info = !data ? [] : data.users_table[0];
   const borrowedBook_info = user_info.borrowed_books;
+  const borrowedBookHistory_info = user_info.borrowed_book_history;
   console.log(borrowedBook_info);
+  console.log(borrowedBookHistory_info);
 
   return (
     <>
@@ -51,7 +57,7 @@ const MyPage = () => {
               過去に読んだ本
             </Typography>
             <Divider />
-            <BorrowedBookHitory bookId={borrowedBook_info} />
+            <BorrowedBookHitory bookId={borrowedBookHistory_info} />
           </div>
         </div>
       </Container>
