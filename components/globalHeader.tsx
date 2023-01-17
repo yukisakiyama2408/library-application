@@ -28,10 +28,6 @@ const GlobalHeader = () => {
     logout();
   };
 
-  const goToProfile = () => {
-    router.push("/user/myPage");
-  };
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -74,7 +70,6 @@ const GlobalHeader = () => {
             >
               <MenuItem>
                 <Typography
-                  // variant="body"
                   component="a"
                   href="/user/myPage"
                   sx={{ flexGrow: 1 }}
