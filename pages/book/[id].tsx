@@ -62,7 +62,6 @@ const BookDetail = () => {
     variables: { id },
   });
   const book: Book = !data ? [] : data.books[0];
-  console.log(book);
   const borrowBook =
     book.borrowed_books &&
     book.borrowed_books.map((borrowed_book: BorrowBook) => borrowed_book.id);
@@ -71,10 +70,7 @@ const BookDetail = () => {
   const { data: data2 } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
   });
-  console.log(data2);
   const user_info = !data2 ? [] : data2.users_table[0];
-  console.log(user_info);
-  console.log(user_info.id);
   const borrowingUser = user_info && user_info.id;
 
   return (

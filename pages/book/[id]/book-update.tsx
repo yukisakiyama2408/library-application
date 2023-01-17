@@ -63,10 +63,8 @@ const BookUpdate = () => {
   const { data } = useQuery(GET_BOOK, {
     variables: { id },
   });
-  // console.log(data);
 
   const book: Book = !data ? [] : data.books[0];
-  console.log(book);
   useEffect(() => {
     setTitle(book.title);
     setAuthor(book.author);

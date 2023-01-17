@@ -36,7 +36,6 @@ type Props = {
 
 const BookIndex = () => {
   const { data } = useQuery<Props>(GET_BOOKS);
-  console.log(data);
   const books = !data ? [] : data.books;
 
   return (
