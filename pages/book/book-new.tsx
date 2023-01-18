@@ -48,9 +48,12 @@ interface Item {
   };
 }
 
-const BookInput = (items: Item) => {
+type ItemInfo = {
+  items: Array<Item>;
+};
+
+const BookInput: React.FC<any> = ({ items }) => {
   const router = useRouter();
-  console.log(items);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
