@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -35,42 +34,13 @@ const ADD_BOOK = gql`
   }
 `;
 
-interface Item {
-  items: {
-    title: string;
-    author: string;
-    image: string;
-    description: string;
-    isbn: {
-      type: string;
-      identifier: string;
-    };
-  };
-}
-
-type ItemInfo = {
-  items: Array<Item>;
-};
-
-const BookInput: React.FC<any> = ({ items }) => {
+const BookInput = () => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
   const [isbn, setIsbn] = useState("");
-
-  const ISBN = items.items && items.items.isbn;
-
-  console.log(ISBN);
-
-  useEffect(() => {
-    setTitle(items.items.title);
-    setAuthor(items.items.author);
-    setImage_url(items.items.image);
-    setDescription(items.items.description);
-    setIsbn(items.items && items.items.isbn.identifier);
-  }, [items]);
 
   const [addBook] = useMutation(ADD_BOOK, {
     onCompleted: () => {
