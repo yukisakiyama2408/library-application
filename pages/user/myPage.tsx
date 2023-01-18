@@ -5,6 +5,7 @@ import BorrowedBookHitory from "../../components/borrowedBookHistory";
 import GlobalHeader from "../../components/globalHeader";
 import { Typography, Divider, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import Link from "next/link";
 
 const GET_USER = gql`
   query getUser($authId: String!) {
@@ -45,9 +46,10 @@ const MyPage = () => {
           <Typography gutterBottom variant="h5" component="div">
             {user_info.name}さんのホーム
           </Typography>
-          <a href="/user/profileEdit">
+          <Link href="/user/profileEdit">
+            {" "}
             <EditIcon />
-          </a>
+          </Link>
         </div>
 
         <div>

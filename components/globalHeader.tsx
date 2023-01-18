@@ -11,6 +11,7 @@ import {
 import { AccountCircle } from "@mui/icons-material";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const GlobalHeader = () => {
   const router = useRouter();
@@ -69,13 +70,11 @@ const GlobalHeader = () => {
               onClose={handleClose}
             >
               <MenuItem>
-                <Typography
-                  component="a"
-                  href="/user/myPage"
-                  sx={{ flexGrow: 1 }}
-                >
-                  My page
-                </Typography>
+                <Link href="/user/myPage">
+                  <Typography component="body" sx={{ flexGrow: 1 }}>
+                    My page
+                  </Typography>
+                </Link>
               </MenuItem>
               <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>
