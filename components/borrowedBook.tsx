@@ -112,10 +112,10 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                 justify-content="center"
                 key={borrowedbook.book.id}
               >
-                <Card sx={{ maxWidth: 350 }}>
+                <Card sx={{ maxWidth: 400, height: 600 }}>
                   <CardMedia
                     component="img"
-                    height="400"
+                    height="350"
                     image={borrowedbook.book.image_url}
                     alt="本の表紙"
                     sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}

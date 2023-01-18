@@ -53,11 +53,11 @@ const BookIndex = () => {
             justify-content="center"
             key={book.id}
           >
-            <Card sx={{ maxWidth: 450 }}>
+            <Card sx={{ maxWidth: 400, height: 450 }}>
               <CardActionArea href={`/book/${book.id}`}>
                 <CardMedia
                   component="img"
-                  height="400"
+                  height="300"
                   image={book.image_url}
                   alt="本の表紙"
                   sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
