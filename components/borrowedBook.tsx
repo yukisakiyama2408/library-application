@@ -79,6 +79,25 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
 
   const borrowedbooks = !data ? [] : data.borrowed_books;
 
+  const limitDate = (date: Date) => {
+    const now = dayjs();
+    const ActualDate = now.format();
+    const BorrowDate = dayjs(date);
+    const ReturnDate = dayjs(BorrowDate).add(2, "w").format();
+    const DateDiff = dayjs(ReturnDate).diff(dayjs(ActualDate), "day");
+    return (
+      <>
+        <div>
+          {formatInTimeZone(
+            new Date(dayjs(date).add(2, "w").format()),
+            "JST",
+            "yyyy年MM月dd日"
+          )}
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       {borrowedUserIds && borrowedUserIds.length > 0 ? (
@@ -110,11 +129,7 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       返却期限：
-                      {formatInTimeZone(
-                        new Date(dayjs(borrowedbook.date).add(2, "w").format()),
-                        "JST",
-                        "yyyy年MM月dd日"
-                      )}
+                      {limitDate(borrowedbook.date)}
                     </Typography>
                   </CardContent>
                   <div>
