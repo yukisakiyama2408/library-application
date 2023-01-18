@@ -56,7 +56,6 @@ const BooksSearch = () => {
         image: Info.imageLinks ? Info.imageLinks.smallThumbnail : "",
       };
     });
-    // console.log(dataFormat);
     setItems(dataFormat[0]);
   };
 

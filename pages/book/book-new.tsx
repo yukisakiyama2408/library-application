@@ -41,7 +41,10 @@ interface Item {
     author: string;
     image: string;
     description: string;
-    isbn: string;
+    isbn: {
+      type: string;
+      identifier: string;
+    };
   };
 }
 
@@ -63,7 +66,7 @@ const BookInput = (items: Item) => {
     setAuthor(items.items.author);
     setImage_url(items.items.image);
     setDescription(items.items.description);
-    setIsbn(ISBN && ISBN[1].identifier);
+    setIsbn(items.items && items.items.isbn.identifier);
   }, [items]);
 
   const [addBook] = useMutation(ADD_BOOK, {
