@@ -27,8 +27,6 @@ const BookDelete: React.FC<Id> = ({ id }) => {
   const [deleteBook] = useMutation(DELETE_BOOK, {
     refetchQueries: ["GetBooks"],
   });
-  // const id = router.query.id
-  // console.log(id);
   const handleDeleteBook = () => {
     deleteBook({
       variables: { id: id },
