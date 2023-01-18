@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
 import BookDelete from "./[id]/book-delete";
-import BookBorrow from "./[id]/book-borrow";
+import BookBorrow from "../../components/book-borrow";
 import GlobalHeader from "../../components/globalHeader";
 import {
   Container,
