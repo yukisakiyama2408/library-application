@@ -34,13 +34,39 @@ const ADD_BOOK = gql`
   }
 `;
 
-const BookInput = () => {
+interface ISBN {
+  [key: string]: string;
+  type: string;
+  identifier: string;
+}
+
+type Items = {
+  items: {
+    title: string;
+    author: string;
+    image: string;
+    description: string;
+    isbn: Array<ISBN>;
+  };
+};
+
+const BookInput = (items: Items) => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
   const [isbn, setIsbn] = useState("");
+
+  const ISBN = items.items && items.items.isbn;
+
+  useEffect(() => {
+    setTitle(items.items.title);
+    setAuthor(items.items.author);
+    setImage_url(items.items.image);
+    setDescription(items.items.description);
+    setIsbn(ISBN && ISBN[1].identifier);
+  }, [items]);
 
   const [addBook] = useMutation(ADD_BOOK, {
     onCompleted: () => {
