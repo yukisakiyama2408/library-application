@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import GlobalHeader from "../../components/globalHeader";
-import Link from "next/link";
+import BookBorrow from "../../components/book-borrow";
 import {
   Card,
   CardContent,
@@ -10,6 +10,13 @@ import {
   Container,
   Button,
   Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableContainer,
+  Paper,
+  Link,
 } from "@mui/material";
 
 const GET_BOOKS = gql`
@@ -43,46 +50,48 @@ const BookIndex = () => {
       <div>
         <GlobalHeader />
       </div>
-      <Grid container spacing={4} mt={0} px={4}>
-        {books.map((book) => (
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            justify-content="center"
-            key={book.id}
-          >
-            <Card sx={{ maxWidth: 400, height: 450 }}>
-              <CardActionArea href={`/book/${book.id}`}>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={book.image_url}
-                  alt="本の表紙"
-                  sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h6" component="div">
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 450 }} aria-label="simple table">
+          <TableBody>
+            {books.map((book) => (
+              <TableRow
+                key={book.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  <Card sx={{ maxWidth: 250 }}>
+                    <CardMedia
+                      component="img"
+                      height="250"
+                      image={book.image_url}
+                      alt="本の表紙"
+                      sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+                    />
+                  </Card>
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  <Link href={`/book/${book.id}`} variant="h6">
                     {book.title}
-                  </Typography>
+                  </Link>
                   <Typography variant="body2" color="text.secondary">
                     {book.author}
                   </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-          // </div>
-        ))}
-      </Grid>
-      {/* <Container maxWidth="sm"> */}
+                </TableCell>
+                <TableCell align="right">
+                  <Typography variant="body2" color="text.secondary">
+                    {book.author}
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <div className="index-add-btn">
         <Button variant="contained" href="/book/search/book-search">
           REGISTER
         </Button>
       </div>
-      {/* </Container> */}
     </>
   );
 };
