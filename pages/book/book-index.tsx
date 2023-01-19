@@ -2,14 +2,8 @@ import { gql, useQuery } from "@apollo/client";
 import GlobalHeader from "../../components/globalHeader";
 import BookBorrow from "../../components/book-borrow";
 import {
-  Card,
-  CardContent,
-  CardActionArea,
-  CardMedia,
   Typography,
-  Container,
   Button,
-  Grid,
   Table,
   TableBody,
   TableCell,
@@ -59,29 +53,27 @@ const BookIndex = () => {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <Card sx={{ maxWidth: 250 }}>
-                    <CardMedia
-                      component="img"
-                      height="250"
-                      image={book.image_url}
-                      alt="本の表紙"
-                      sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-                    />
-                  </Card>
+                  <div className="index-book-img">
+                    <img src={book.image_url} className="index-book-cover" />
+                  </div>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <Link href={`/book/${book.id}`} variant="h6">
-                    {book.title}
-                  </Link>
+                  <div className="index-book-infos">
+                    <div className="index-book-info">
+                      <Link href={`/book/${book.id}`} variant="h6">
+                        {book.title}
+                      </Link>
+                      <Typography variant="body2" color="text.secondary">
+                        {book.author}
+                      </Typography>
+                    </div>
+                  </div>
+                </TableCell>
+                {/* <TableCell align="right">
                   <Typography variant="body2" color="text.secondary">
                     {book.author}
                   </Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Typography variant="body2" color="text.secondary">
-                    {book.author}
-                  </Typography>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             ))}
           </TableBody>
