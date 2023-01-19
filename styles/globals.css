@@ -16,8 +16,8 @@ a {
 }
 
 .index-book-cover {
-  height: 300px;
-  width: 200px;
+  height: 250px;
+  width: 150px;
   object-fit: contain;
 }
 
@@ -26,7 +26,7 @@ a {
 }
 
 .index-book-info {
-  margin-left: 50px;
+  margin-left: 30px;
 }
 
 .index-add-btn {
@@ -35,7 +35,6 @@ a {
 
 .book-card-index {
   margin: 10px;
-  /* float:left; */
 }
 
 .register-button {
