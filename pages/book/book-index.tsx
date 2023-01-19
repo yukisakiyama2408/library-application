@@ -118,7 +118,7 @@ const BookIndex = () => {
         </Table>
       </TableContainer>
       <div className="index-add-btn">
-        <Button variant="contained" href="/book/search/book-search">
+        <Button variant="contained" href="/book/search/book-google-search">
           REGISTER
         </Button>
       </div>
