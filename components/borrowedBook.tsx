@@ -71,9 +71,6 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
       </>
     );
   };
-
-  console.log(borrowedbooks);
-
   return (
     <>
       {borrowedUserIds && borrowedUserIds.length > 0 ? (
