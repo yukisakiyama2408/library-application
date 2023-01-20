@@ -48,11 +48,42 @@ const BookIndex: React.FC<BookProps> = (books) => {
 
   const [loadIndex, setLoadIndex] = useState(10);
   const displayMore = () => {
-    if (loadIndex > Books.length) {
-      setLoadIndex(loadIndex - 10);
-    } else {
-      setLoadIndex(loadIndex + 10);
-    }
+    setLoadIndex(loadIndex + 10);
+  };
+
+  const displayLess = () => {
+    setLoadIndex(loadIndex - 10);
+  };
+
+  const DisplayButton = () => {
+    return (
+      <>
+        {loadIndex < 11 && (
+          <div>
+            <Button onClick={displayMore} variant="contained">
+              もっと表示する
+            </Button>
+          </div>
+        )}
+        {loadIndex > 10 && loadIndex < Books.length && (
+          <div>
+            <Button onClick={displayLess} variant="contained">
+              縮める
+            </Button>
+            <Button onClick={displayMore} variant="contained">
+              もっと表示する
+            </Button>
+          </div>
+        )}
+        {loadIndex > Books.length && (
+          <div>
+            <Button onClick={displayLess} variant="contained">
+              縮める
+            </Button>
+          </div>
+        )}
+      </>
+    );
   };
 
   return (
@@ -101,18 +132,10 @@ const BookIndex: React.FC<BookProps> = (books) => {
             ))}
           </TableBody>
         </Table>
-        <div>
-          {loadIndex > Books.length ? (
-            <Button onClick={displayMore} variant="contained">
-              縮める
-            </Button>
-          ) : (
-            <Button onClick={displayMore} variant="contained">
-              さらに表示する
-            </Button>
-          )}
-        </div>
       </TableContainer>
+      <div>
+        <DisplayButton />
+      </div>
     </>
   );
 };
