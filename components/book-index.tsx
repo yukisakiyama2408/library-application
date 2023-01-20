@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import BookBorrow from "./book-borrow";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
 import {
   Typography,
   Table,
@@ -10,6 +11,7 @@ import {
   TableContainer,
   Paper,
   Link,
+  Button,
 } from "@mui/material";
 
 const GET_USER = gql`
@@ -44,12 +46,21 @@ const BookIndex: React.FC<BookProps> = (books) => {
   const borrowingUser = user_info && user_info.id;
   const Books = books && books.books;
 
+  const [loadIndex, setLoadIndex] = useState(10);
+  const displayMore = () => {
+    if (loadIndex > Books.length) {
+      setLoadIndex(loadIndex - 10);
+    } else {
+      setLoadIndex(loadIndex + 10);
+    }
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 450 }} aria-label="simple table">
           <TableBody>
-            {Books.map((book: Book) => (
+            {Books.slice(0, loadIndex).map((book: Book) => (
               <TableRow
                 key={book.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -90,6 +101,17 @@ const BookIndex: React.FC<BookProps> = (books) => {
             ))}
           </TableBody>
         </Table>
+        <div>
+          {loadIndex > Books.length ? (
+            <Button onClick={displayMore} variant="contained">
+              縮める
+            </Button>
+          ) : (
+            <Button onClick={displayMore} variant="contained">
+              さらに表示する
+            </Button>
+          )}
+        </div>
       </TableContainer>
     </>
   );
