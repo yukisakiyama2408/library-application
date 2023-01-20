@@ -19,7 +19,7 @@ type Item = {
   };
 };
 
-const BooksSearch = () => {
+const BooksGoogleSearch = () => {
   const [items, setItems] = useState([]);
   const [value, setValue] = useState("");
   const handleNewBooks = (event: {
@@ -71,4 +71,4 @@ const BooksSearch = () => {
   );
 };
 
-export default BooksSearch;
+export default BooksGoogleSearch;

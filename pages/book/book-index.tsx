@@ -1,5 +1,4 @@
 import { gql, useQuery } from "@apollo/client";
-import GlobalHeader from "../../components/globalHeader";
 import BookBorrow from "../../components/book-borrow";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
@@ -13,20 +12,6 @@ import {
   Paper,
   Link,
 } from "@mui/material";
-
-const GET_BOOKS = gql`
-  query GetBooks {
-    books {
-      id
-      title
-      author
-      image_url
-      borrowed_books {
-        id
-      }
-    }
-  }
-`;
 
 const GET_USER = gql`
   query getUser($authId: String!) {
@@ -43,39 +28,29 @@ interface Book {
   author: string;
   image_url: string;
   borrowed_books: {
-    map(arg0: (borrowed_book: BorrowBook) => number): unknown;
     id: number;
   };
 }
 
-type BorrowBook = {
-  id: number;
-  borrowed_book_id: number;
-};
-type Props = {
+type BookProps = {
   books: Array<Book>;
 };
 
-const BookIndex = () => {
-  const { data } = useQuery<Props>(GET_BOOKS);
-  const books = !data ? [] : data.books;
-  console.log(books);
+const BookIndex: React.FC<BookProps> = (books) => {
   const { user } = useAuth0();
   const { data: data2 } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
   });
   const user_info = !data2 ? [] : data2.users_table[0];
   const borrowingUser = user_info && user_info.id;
+  const Books = books && books.books;
 
   return (
     <>
-      <div>
-        <GlobalHeader />
-      </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 450 }} aria-label="simple table">
           <TableBody>
-            {books.map((book) => (
+            {Books.map((book: Book) => (
               <TableRow
                 key={book.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -117,11 +92,6 @@ const BookIndex = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <div className="index-add-btn">
-        <Button variant="contained" href="/book/search/book-google-search">
-          REGISTER
-        </Button>
-      </div>
     </>
   );
 };
