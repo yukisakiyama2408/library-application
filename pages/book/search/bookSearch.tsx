@@ -36,10 +36,10 @@ const BookSearch = () => {
   const { data } = useQuery<Props>(GET_BOOKS);
   const books = !data ? [] : data.books;
 
-  const [showBooks, setShowBooks] = useState<Book[]>(books && books);
+  const [showBooks, setShowBooks] = useState<Book[]>([]);
   useEffect(() => {
     setShowBooks(books);
-  }, []);
+  }, [books]);
   const handleSearch = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -63,9 +63,7 @@ const BookSearch = () => {
             />
           </Box>
         </Container>
-        <div>
-          <BookIndex books={showBooks} />
-        </div>
+        <div>{books && <BookIndex books={showBooks} />}</div>
         <div className="index-add-btn">
           <Button variant="contained" href="/book/search/book-google-search">
             REGISTER

@@ -54,12 +54,12 @@ const BookIndex: React.FC<BookProps> = (books) => {
                 key={book.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell align="left" className="book-table">
                   <div className="index-book-img">
                     <img src={book.image_url} className="index-book-cover" />
                   </div>
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell align="left">
                   <div className="index-book-infos">
                     <div className="index-book-info">
                       <Link href={`/book/${book.id}`} variant="h6">

@@ -11,6 +11,10 @@ a {
   text-decoration: none;
 }
 
+.book-table {
+  width: 250px;
+}
+
 .index-book-img {
   margin-left: 50px;
 }
