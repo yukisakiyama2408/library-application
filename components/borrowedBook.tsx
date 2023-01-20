@@ -3,20 +3,6 @@ import ReturnBook from "./returnBook";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { formatInTimeZone } from "date-fns-tz";
 import dayjs from "dayjs";
-const GET_BORROWED_BOOK = gql`
-  query getBorrowedBook($id: [Int!]) {
-    books(where: { id: { _in: $id } }) {
-      id
-      title
-      author
-      image_url
-      description
-      borrowed_books {
-        date
-      }
-    }
-  }
-`;
 
 const GET_BORROWED_BOOK_INFO = gql`
   query getBorrowedBook($id: [Int!]) {
@@ -45,7 +31,6 @@ interface Book {
 }
 
 type Props = {
-  map(arg0: (borrowedbook: BookMap) => JSX.Element): import("react").ReactNode;
   borrowed_books: Array<Book>;
 };
 
@@ -58,17 +43,6 @@ interface BookId {
 type BookIds = {
   bookId: Array<BookId>;
 };
-
-interface BookMap {
-  date: Date;
-  book: {
-    id: string;
-    title: string;
-    author: string;
-    image_url: string;
-    description: string;
-  };
-}
 
 const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
   const borrowedUserIds =
@@ -97,6 +71,8 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
       </>
     );
   };
+
+  console.log(borrowedbooks);
 
   return (
     <>
