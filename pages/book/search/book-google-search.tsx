@@ -8,7 +8,7 @@ interface ISBN {
   identifier: string;
 }
 
-type Item = {
+interface Item {
   volumeInfo: any;
   items: {
     title: string;
@@ -17,7 +17,7 @@ type Item = {
     description: string;
     isbn: Array<ISBN>;
   };
-};
+}
 
 const BooksGoogleSearch = () => {
   const [items, setItems] = useState([]);

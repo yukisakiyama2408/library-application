@@ -40,7 +40,7 @@ interface ISBN {
   identifier: string;
 }
 
-type Items = {
+interface Items {
   items: {
     title: string;
     author: string;
@@ -48,9 +48,9 @@ type Items = {
     description: string;
     isbn: Array<ISBN>;
   };
-};
+}
 
-const BookInput = (items: Items) => {
+const BookInput: React.FC<Items> = (items) => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
