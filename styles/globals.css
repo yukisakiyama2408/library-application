@@ -50,6 +50,22 @@ a {
   place-items: center;
 }
 
+.profileInfo {
+  float: left;
+}
+
+.myPage {
+  margin-top: 50px;
+}
+
+.myPageBooks {
+  margin-top: 50px;
+}
+
+.myPageBooksHistory {
+  margin-top: 80px;
+}
+
 .image-section {
   float: left;
 }

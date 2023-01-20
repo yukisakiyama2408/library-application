@@ -40,41 +40,47 @@ const MyPage = () => {
       <div>
         <GlobalHeader />
       </div>
-      <Container>
-        <div>
-          <Typography gutterBottom variant="h5" component="div">
-            {user_info.name}さんのホーム
-          </Typography>
-          <Link href="/user/profileEdit">
-            <EditIcon />
-          </Link>
-        </div>
-
-        <div>
+      <div className="myPage">
+        <Container>
           <div>
+            <Typography
+              gutterBottom
+              variant="h4"
+              component="div"
+              className="profileInfo"
+            >
+              {user_info.name}さんのホーム
+            </Typography>
+            <Link href="/user/profileEdit" className="profileInfo">
+              <EditIcon />
+            </Link>
+          </div>
+          <div className="myPageBooks">
             <div>
-              <Typography gutterBottom variant="h6" component="div">
-                現在借りている本
-              </Typography>
+              <div>
+                <Typography gutterBottom variant="h5" component="div">
+                  現在借りている本
+                </Typography>
+              </div>
+              <Divider />
+              <div>
+                <BorrowedBook bookId={borrowedBook_info} />
+              </div>
             </div>
-            <Divider />
-            <div>
-              <BorrowedBook bookId={borrowedBook_info} />
+            <div className="myPageBooksHistory">
+              <div>
+                <Typography gutterBottom variant="h5" component="div">
+                  過去に読んだ本
+                </Typography>
+              </div>
+              <Divider />
+              <div>
+                <BorrowedBookHitory bookId={borrowedBookHistory_info} />
+              </div>
             </div>
           </div>
-          <div>
-            <div>
-              <Typography gutterBottom variant="h6" component="div">
-                過去に読んだ本
-              </Typography>
-            </div>
-            <Divider />
-            <div>
-              <BorrowedBookHitory bookId={borrowedBookHistory_info} />
-            </div>
-          </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </>
   );
 };
