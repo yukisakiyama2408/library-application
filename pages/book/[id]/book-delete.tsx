@@ -31,7 +31,7 @@ const BookDelete: React.FC<Id> = ({ id }) => {
     deleteBook({
       variables: { id: id },
     });
-    router.push("/book/book-index");
+    router.push("/");
   };
 
   const [open, setOpen] = useState(false);

@@ -1,9 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
-import BookBorrow from "../../components/book-borrow";
+import BookBorrow from "./book-borrow";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   Typography,
-  Button,
   Table,
   TableBody,
   TableCell,

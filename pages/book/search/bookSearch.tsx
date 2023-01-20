@@ -1,8 +1,8 @@
 import { useState, useEffect, ChangeEvent } from "react";
-import BookIndex from "../book-index";
+import BookIndex from "../../../components/book-index";
 import GlobalHeader from "../../../components/globalHeader";
 import { gql, useQuery } from "@apollo/client";
-import { Box, TextField, Container } from "@mui/material";
+import { Box, TextField, Container, Button } from "@mui/material";
 
 const GET_BOOKS = gql`
   query GetBooks {
@@ -65,6 +65,11 @@ const BookSearch = () => {
         </Container>
         <div>
           <BookIndex books={showBooks} />
+        </div>
+        <div className="index-add-btn">
+          <Button variant="contained" href="/book/search/book-google-search">
+            REGISTER
+          </Button>
         </div>
       </div>
     </>

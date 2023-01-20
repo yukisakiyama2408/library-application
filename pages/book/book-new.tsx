@@ -87,7 +87,7 @@ const BookInput = (items: Items) => {
         isbn: isbn,
       },
     });
-    router.push("/book/book-index");
+    router.push("/");
   };
 
   return (
