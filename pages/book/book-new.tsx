@@ -40,33 +40,36 @@ interface ISBN {
   identifier: string;
 }
 
-interface Items {
-  items: {
-    title: string;
-    author: string;
-    image: string;
-    description: string;
-    isbn: Array<ISBN>;
-  };
+export interface BookItem {
+  title: string;
+  author: string;
+  image: string;
+  description: string;
+  isbn: Array<ISBN>;
 }
 
-const BookInput: React.FC<Items> = (items) => {
+interface Props {
+  item: BookItem;
+}
+
+export const BookInput: React.FC<Props> = ({ item }) => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
   const [isbn, setIsbn] = useState("");
+  console.log(item);
 
-  const ISBN = items.items && items.items.isbn;
+  const ISBN = item && item.isbn;
 
   useEffect(() => {
-    setTitle(items.items.title);
-    setAuthor(items.items.author);
-    setImage_url(items.items.image);
-    setDescription(items.items.description);
+    setTitle(item.title);
+    setAuthor(item.author);
+    setImage_url(item.image);
+    setDescription(item.description);
     setIsbn(ISBN && ISBN[1].identifier);
-  }, [items]);
+  }, [item]);
 
   const [addBook] = useMutation(ADD_BOOK, {
     onCompleted: () => {
@@ -156,5 +159,3 @@ const BookInput: React.FC<Items> = (items) => {
     </div>
   );
 };
-
-export default BookInput;

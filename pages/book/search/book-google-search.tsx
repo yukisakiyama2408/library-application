@@ -1,6 +1,6 @@
 import { TextField, Button, Container } from "@mui/material";
 import { SetStateAction, useState } from "react";
-import BookInput from "../book-new";
+import { BookInput, BookItem } from "../book-new";
 
 interface ISBN {
   [key: string]: string;
@@ -20,7 +20,7 @@ interface Item {
 }
 
 const BooksGoogleSearch = () => {
-  const [items, setItems] = useState([]);
+  const [item, setItem] = useState<BookItem>();
   const [value, setValue] = useState("");
   const handleNewBooks = (event: {
     target: { value: SetStateAction<string> };
@@ -45,7 +45,7 @@ const BooksGoogleSearch = () => {
         image: Info.imageLinks ? Info.imageLinks.smallThumbnail : "",
       };
     });
-    setItems(dataFormat[0]);
+    setItem(dataFormat[0]);
   };
 
   return (
@@ -66,7 +66,7 @@ const BooksGoogleSearch = () => {
           </form>
         </Container>
       </div>
-      <BookInput items={items} />
+      {item && <BookInput item={item} />}
     </>
   );
 };
