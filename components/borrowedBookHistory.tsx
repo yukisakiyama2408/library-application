@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { GET_BORROWED_BOOK_HISTORY } from "../query/book/bookGet";
 import ReturnBook from "./returnBook";
 import {
   Card,
@@ -10,18 +11,6 @@ import {
   Button,
   Grid,
 } from "@mui/material";
-
-const GET_BORROWED_BOOK_HISTORY = gql`
-  query getBorrowedBookHistory($id: [Int!]) {
-    books(where: { id: { _in: $id } }) {
-      id
-      title
-      author
-      image_url
-      description
-    }
-  }
-`;
 
 interface Book {
   id: string;

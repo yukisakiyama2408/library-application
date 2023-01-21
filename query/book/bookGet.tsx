@@ -41,3 +41,15 @@ export const GET_BORROWED_BOOK_INFO = gql`
     }
   }
 `;
+
+export const GET_BORROWED_BOOK_HISTORY = gql`
+  query getBorrowedBookHistory($id: [Int!]) {
+    books(where: { id: { _in: $id } }) {
+      id
+      title
+      author
+      image_url
+      description
+    }
+  }
+`;
