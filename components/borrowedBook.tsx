@@ -1,23 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import ReturnBook from "./returnBook";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { formatInTimeZone } from "date-fns-tz";
 import dayjs from "dayjs";
-
-const GET_BORROWED_BOOK_INFO = gql`
-  query getBorrowedBook($id: [Int!]) {
-    borrowed_books(where: { borrowing_user_id: { _in: $id } }) {
-      date
-      book {
-        id
-        title
-        author
-        image_url
-        description
-      }
-    }
-  }
-`;
+import { GET_BORROWED_BOOK_INFO } from "../query/book/bookGet";
 
 interface Book {
   date: Date;

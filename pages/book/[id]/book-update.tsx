@@ -2,19 +2,7 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
-
-const GET_BOOK = gql`
-  query GetBooks($id: Int!) {
-    books(where: { id: { _eq: $id } }) {
-      id
-      title
-      author
-      image_url
-      description
-      isbn
-    }
-  }
-`;
+import { GET_BOOK_INFO } from "../../../query/book/bookGet";
 
 const UPDATE_BOOK = gql`
   mutation updateBook(
@@ -60,7 +48,7 @@ interface Book {
 const BookUpdate = () => {
   const router = useRouter();
   const id = router.query.id;
-  const { data } = useQuery(GET_BOOK, {
+  const { data } = useQuery(GET_BOOK_INFO, {
     variables: { id },
   });
 

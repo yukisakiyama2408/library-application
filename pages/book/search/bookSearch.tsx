@@ -3,20 +3,7 @@ import BookIndex from "../../../components/book-index";
 import GlobalHeader from "../../../components/globalHeader";
 import { gql, useQuery } from "@apollo/client";
 import { Box, TextField, Container, Button } from "@mui/material";
-
-const GET_BOOKS = gql`
-  query GetBooks {
-    books {
-      id
-      title
-      author
-      image_url
-      borrowed_books {
-        id
-      }
-    }
-  }
-`;
+import { GET_BOOKS } from "../../../query/book/bookGet";
 
 interface Book {
   id: number;
