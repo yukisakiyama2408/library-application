@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import BookIndex from "../../../components/book-index";
 import GlobalHeader from "../../../components/globalHeader";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Box, TextField, Container, Button } from "@mui/material";
 import { GET_BOOKS } from "../../../query/book/bookGet";
 

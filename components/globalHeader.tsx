@@ -10,11 +10,9 @@ import {
 } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const GlobalHeader = () => {
-  const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);

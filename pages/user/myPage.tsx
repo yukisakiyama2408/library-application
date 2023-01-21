@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
 import BorrowedBook from "../../components/borrowedBook";
 import BorrowedBookHitory from "../../components/borrowedBookHistory";
