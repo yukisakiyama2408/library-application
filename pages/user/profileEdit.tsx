@@ -3,14 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
-
-const GET_USER_INFO = gql`
-  query getUser($authId: String!) {
-    users_table(where: { authId: { _eq: $authId } }) {
-      name
-    }
-  }
-`;
+import { GET_USER } from "../../query/user/userGet";
 
 const UPDATE_USER = gql`
   mutation updateUser($authId: String!, $name: String!) {
@@ -30,7 +23,7 @@ const ProfileEdit = () => {
   const router = useRouter();
   const { user } = useAuth0();
   console.log(user);
-  const { data } = useQuery(GET_USER_INFO, {
+  const { data } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
   });
   const userInfomation = !data ? [] : data.users_table[0];

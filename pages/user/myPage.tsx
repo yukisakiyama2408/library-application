@@ -6,24 +6,7 @@ import GlobalHeader from "../../components/globalHeader";
 import { Typography, Divider, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Link from "next/link";
-
-const GET_USER = gql`
-  query getUser($authId: String!) {
-    users_table(where: { authId: { _eq: $authId } }) {
-      id
-      name
-      borrowed_books {
-        id
-        borrowed_book_id
-        borrowing_user_id
-      }
-      borrowed_book_history {
-        id
-        borrowed_book_id
-      }
-    }
-  }
-`;
+import { GET_USER } from "../../query/user/userGet";
 
 const MyPage = () => {
   const { user } = useAuth0();
