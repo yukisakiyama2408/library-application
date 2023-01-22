@@ -98,7 +98,11 @@ const BookIndex: React.FC<BookProps> = (books) => {
               >
                 <TableCell align="left" className="book-table">
                   <div className="index-book-img">
-                    <img src={book.image_url} className="index-book-cover" />
+                    <img
+                      src={book.image_url}
+                      alt="本の表紙"
+                      className="index-book-cover"
+                    />
                   </div>
                 </TableCell>
                 <TableCell align="left">
