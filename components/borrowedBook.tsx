@@ -84,9 +84,6 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                       {borrowedbook.book.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      {borrowedbook.book.author}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
                       返却期限：
                       {limitDate(borrowedbook.date)}
                     </Typography>
