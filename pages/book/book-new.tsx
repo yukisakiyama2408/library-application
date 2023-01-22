@@ -59,15 +59,14 @@ export const BookInput: React.FC<Props> = ({ item }) => {
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
   const [isbn, setIsbn] = useState("");
-  console.log(item);
 
-  useEffect(() => {
+  const RegisterInfo = () => {
     setTitle(item.title);
     setAuthor(item.author);
     setImage_url(item.image);
     setDescription(item.description);
     setIsbn(item.isbn[1].identifier);
-  }, [item]);
+  };
 
   const [addBook] = useMutation(ADD_BOOK, {
     onCompleted: () => {
@@ -95,8 +94,8 @@ export const BookInput: React.FC<Props> = ({ item }) => {
     <div>
       <Container component="main" maxWidth="xs">
         <div>
-          <Button variant="contained" href="/book/book-index">
-            Back to Home
+          <Button variant="contained" onClick={RegisterInfo}>
+            追加
           </Button>
         </div>
 

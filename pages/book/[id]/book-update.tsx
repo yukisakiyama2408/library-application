@@ -1,5 +1,5 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
 import { GET_BOOK_INFO } from "../../../query/book/bookGet";
@@ -51,28 +51,23 @@ const BookUpdate = () => {
   const { data } = useQuery(GET_BOOK_INFO, {
     variables: { id },
   });
-
   const book: Book = !data ? [] : data.books[0];
-  useEffect(() => {
+
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [image_url, setImage_url] = useState(" ");
+  const [description, setDescription] = useState(" ");
+  const [isbn, setIsbn] = useState(" ");
+
+  const AddInfo = () => {
     setTitle(book.title);
     setAuthor(book.author);
     setImage_url(book.image_url);
     setDescription(book.description);
     setIsbn(book.isbn);
-  }, [book]);
+  };
 
-  const [title, setTitle] = useState(book.title);
-  const [author, setAuthor] = useState(book.author);
-  const [image_url, setImage_url] = useState(book.image_url);
-  const [description, setDescription] = useState(book.description);
-  const [isbn, setIsbn] = useState(book.isbn);
-  const [updateBook] = useMutation(UPDATE_BOOK, {
-    onCompleted: () => {
-      setTitle(" "), setAuthor(" "), setImage_url(" ");
-      setDescription(" ");
-      setIsbn(" ");
-    },
-  });
+  const [updateBook] = useMutation(UPDATE_BOOK);
   const handleUpdateBook = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await updateBook({
@@ -91,6 +86,8 @@ const BookUpdate = () => {
   return (
     <div>
       <div>
+        <Button onClick={AddInfo}>情報を追加</Button>
+
         <Container component="main" maxWidth="xs">
           <Box
             component="form"
