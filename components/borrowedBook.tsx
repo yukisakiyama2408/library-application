@@ -71,7 +71,7 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                 justify-content="center"
                 key={borrowedbook.book.id}
               >
-                <Card sx={{ maxWidth: 400, height: 600 }}>
+                <Card sx={{ maxWidth: 400, height: 500 }}>
                   <CardMedia
                     component="img"
                     height="350"
@@ -80,9 +80,6 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                     sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
-                      {borrowedbook.book.title}
-                    </Typography>
                     <Typography variant="body2" color="text.secondary">
                       返却期限：
                       {limitDate(borrowedbook.date)}

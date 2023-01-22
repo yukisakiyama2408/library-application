@@ -37,42 +37,38 @@ const BorrowedBookHitory: React.FC<BookIds> = ({ bookId }) => {
     variables: { id: borrowedBookIds },
   });
 
-  const books = !data ? [] : data.books;
+  const book_histories = !data ? [] : data.books;
 
   return (
     <>
-      <Grid container spacing={4} mt={0} px={4}>
-        {books.map((book) => (
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            justify-content="center"
-            key={book.id}
-          >
-            <Card sx={{ maxWidth: 350 }}>
-              <CardActionArea href={`/book/${book.id}`}>
-                <CardMedia
-                  component="img"
-                  height="400"
-                  image={book.image_url}
-                  alt="本の表紙"
-                  sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h6" component="div">
-                    {book.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {book.author}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      {borrowedBookIds && borrowedBookIds.length > 0 ? (
+        <Grid container spacing={4} mt={0} px={4}>
+          {book_histories.map((book) => (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              justify-content="center"
+              key={book.id}
+            >
+              <Card sx={{ maxWidth: 350 }}>
+                <CardActionArea href={`/book/${book.id}`}>
+                  <CardMedia
+                    component="img"
+                    height="350"
+                    image={book.image_url}
+                    alt="本の表紙"
+                    sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+                  />
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <div>書籍は登録されていません</div>
+      )}
     </>
   );
 };
