@@ -30,7 +30,12 @@ export default class MyDocument extends Document {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content="#ffffff" />
-
+          <meta property="og:title" content="FGN図書館" />
+          <meta
+            property="og:description"
+            content="FGNに蔵書されている書籍を借りれるアプリです"
+          />
+          <meta property="og:image" content="/image/tosyokan_book_tana.png" />
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>
