@@ -63,7 +63,7 @@ const BookUpdate = () => {
 
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
-  const [image_url, setImage_url] = useState(book && book.image_url);
+  const [image_url, setImage_url] = useState(book.image_url);
   const [description, setDescription] = useState(book.description);
   const [isbn, setIsbn] = useState(book.isbn);
   const [updateBook] = useMutation(UPDATE_BOOK, {
@@ -98,11 +98,6 @@ const BookUpdate = () => {
             sx={{ mt: 1 }}
           >
             <h2>Update</h2>
-            {/* <div>
-              <Button variant="contained" onClick={handleInfobook}>
-                追加{" "}
-              </Button>
-            </div> */}
             <Grid container spacing={2}>
               <Grid item xs={30}>
                 <TextField
