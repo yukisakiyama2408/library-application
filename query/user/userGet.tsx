@@ -5,6 +5,7 @@ export const GET_USER = gql`
     users_table(where: { authId: { _eq: $authId } }) {
       id
       name
+      email
       borrowed_books {
         id
         borrowed_book_id

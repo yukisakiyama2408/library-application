@@ -45,6 +45,11 @@ a {
   margin-top: 10px;
 }
 
+.editBtn {
+  float: left;
+  margin: 10px;
+}
+
 .login_btn {
   display: grid;
   place-items: center;

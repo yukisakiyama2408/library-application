@@ -2,8 +2,10 @@ import { useState, useEffect, ChangeEvent } from "react";
 import BookIndex from "../../../components/book-index";
 import GlobalHeader from "../../../components/globalHeader";
 import { useQuery } from "@apollo/client";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Box, TextField, Container, Button } from "@mui/material";
 import { GET_BOOKS } from "../../../query/book/bookGet";
+import { GET_USER } from "../../../query/user/userGet";
 
 interface Book {
   id: number;
@@ -19,7 +21,7 @@ type Props = {
   books: Array<Book>;
 };
 
-const BookSearch = () => {
+export const BookSearch = () => {
   const { data } = useQuery<Props>(GET_BOOKS);
   const books = !data ? [] : data.books;
 
@@ -34,6 +36,27 @@ const BookSearch = () => {
       return book.title.match(e.target.value);
     });
     setShowBooks(result);
+  };
+
+  const { user } = useAuth0();
+  const { data: data2 } = useQuery(GET_USER, {
+    variables: { authId: user && user.sub },
+  });
+  const userEmail = !data2 ? [] : data2.users_table[0].email;
+  const AdminEmail = "yuki.king.0422@gmail.com";
+
+  const RegiterButton = () => {
+    return (
+      <>
+        {userEmail == AdminEmail && (
+          <div className="index-add-btn">
+            <Button variant="contained" href="/book/search/book-google-search">
+              REGISTER
+            </Button>
+          </div>
+        )}
+      </>
+    );
   };
 
   return (
@@ -52,14 +75,8 @@ const BookSearch = () => {
           </Box>
         </Container>
         <div>{books && <BookIndex books={showBooks} />}</div>
-        <div className="index-add-btn">
-          <Button variant="contained" href="/book/search/book-google-search">
-            REGISTER
-          </Button>
-        </div>
+        <RegiterButton />
       </div>
     </>
   );
 };
-
-export default BookSearch;

@@ -5,6 +5,7 @@ import Link from "next/link";
 import BookDelete from "../../components/book-delete";
 import BookBorrow from "../../components/book-borrow";
 import GlobalHeader from "../../components/globalHeader";
+import { GET_USER } from "../../query/user/userGet";
 import {
   Container,
   Typography,
@@ -25,15 +26,6 @@ const GET_BOOK = gql`
       borrowed_books {
         id
       }
-    }
-  }
-`;
-
-const GET_USER = gql`
-  query getUser($authId: String!) {
-    users_table(where: { authId: { _eq: $authId } }) {
-      id
-      name
     }
   }
 `;
@@ -73,6 +65,33 @@ const BookDetail = () => {
   const user_info = !data2 ? [] : data2.users_table[0];
   const borrowingUser = user_info && user_info.id;
 
+  const userEmail = user_info.email;
+  const AdminEmail = "yuki.king.0422@gmail.com";
+
+  const EditButton = () => {
+    return (
+      <>
+        {userEmail == AdminEmail && (
+          <>
+            <div className="editBtn">
+              <Button variant="contained">
+                <Link
+                  href="/book/[id]/book-update"
+                  as={`/book/${book.id}/book-update`}
+                >
+                  Update
+                </Link>
+              </Button>
+            </div>
+            <div className="editBtn">
+              <BookDelete id={book.id} />
+            </div>
+          </>
+        )}
+      </>
+    );
+  };
+
   return (
     <div>
       <div>
@@ -97,19 +116,6 @@ const BookDetail = () => {
         <p>{book.description}</p>
       </Container>
       <div>
-        <div>
-          <Button variant="contained">
-            <Link
-              href="/book/[id]/book-update"
-              as={`/book/${book.id}/book-update`}
-            >
-              Update
-            </Link>
-          </Button>
-        </div>
-        <div>
-          <BookDelete id={book.id} />
-        </div>
         {borrowBook && borrowBook.length > 0 ? (
           <div>貸出中</div>
         ) : (
@@ -117,6 +123,9 @@ const BookDetail = () => {
             <BookBorrow id={book.id} borrowingUser={borrowingUser} />
           </div>
         )}
+      </div>
+      <div>
+        <EditButton />
       </div>
     </div>
   );
