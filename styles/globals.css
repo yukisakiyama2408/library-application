@@ -50,6 +50,10 @@ a {
   place-items: center;
 }
 
+.login {
+  margin-top: 300px;
+}
+
 .profileInfo {
   float: left;
 }

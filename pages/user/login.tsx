@@ -10,15 +10,18 @@ const Login = () => {
   return (
     <>
       <div className="login_btn">
-        {isAuthenticated ? (
-          <Button onClick={handleLogout} variant="contained">
-            ログアウト
-          </Button>
-        ) : (
-          <Button onClick={loginWithRedirect} variant="contained">
-            ログイン
-          </Button>
-        )}
+        <div className="login">
+          {" "}
+          {isAuthenticated ? (
+            <Button onClick={handleLogout} variant="contained">
+              ログアウト
+            </Button>
+          ) : (
+            <Button onClick={loginWithRedirect} variant="contained">
+              ログイン
+            </Button>
+          )}
+        </div>
       </div>
     </>
   );
