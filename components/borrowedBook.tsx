@@ -1,8 +1,7 @@
 import { useQuery } from "@apollo/client";
 import ReturnBook from "./returnBook";
+import { LimitDate } from "./returnDate";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
-import { formatInTimeZone } from "date-fns-tz";
-import dayjs from "dayjs";
 import { GET_BORROWED_BOOK_INFO } from "../query/book/bookGet";
 
 interface Book {
@@ -30,56 +29,14 @@ type BookIds = {
   bookId: Array<BookId>;
 };
 
-const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
+export const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
   const borrowedUserIds =
     bookId && bookId.map((bookid) => bookid.borrowing_user_id);
   const { data } = useQuery<Props>(GET_BORROWED_BOOK_INFO, {
     variables: { id: borrowedUserIds },
   });
-
   const borrowedbooks = !data ? [] : data.borrowed_books;
 
-  const limitDate = (date: Date) => {
-    const now = dayjs();
-    const ActualDate = now.format();
-    const BorrowDate = dayjs(date);
-    const ReturnDate = dayjs(BorrowDate).add(2, "w").format();
-    const DateDiff = dayjs(ReturnDate).diff(dayjs(ActualDate), "day");
-    console.log(DateDiff);
-    return (
-      <>
-        <div>
-          {DateDiff >= 2 && (
-            <Typography variant="body2" color="text.secondary">
-              {formatInTimeZone(
-                new Date(dayjs(date).add(2, "w").format()),
-                "JST",
-                "yyyy年MM月dd日"
-              )}
-            </Typography>
-          )}
-          {DateDiff <= 1 && DateDiff >= 0 && (
-            <Typography variant="body2" color="red">
-              {formatInTimeZone(
-                new Date(dayjs(date).add(2, "w").format()),
-                "JST",
-                "yyyy年MM月dd日"
-              )}
-            </Typography>
-          )}
-          {DateDiff < 0 && (
-            <Typography variant="body2" color="red" sx={{ fontWeight: "bold" }}>
-              {formatInTimeZone(
-                new Date(dayjs(date).add(2, "w").format()),
-                "JST",
-                "yyyy年MM月dd日"
-              )}
-            </Typography>
-          )}
-        </div>
-      </>
-    );
-  };
   return (
     <>
       {borrowedUserIds && borrowedUserIds.length > 0 ? (
@@ -105,7 +62,7 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                   <CardContent>
                     <Typography variant="body2" color="text.secondary">
                       返却期限：
-                      {limitDate(borrowedbook.date)}
+                      {LimitDate(borrowedbook.date)}
                     </Typography>
                   </CardContent>
                   <div>
@@ -121,5 +78,3 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
     </>
   );
 };
-
-export default BorrowedBook;
