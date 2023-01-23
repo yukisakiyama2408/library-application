@@ -42,9 +42,7 @@ export const BookSearch = () => {
   const { data: data2 } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
   });
-  console.log(data2);
   const user_info = !data2 ? [] : data2.users_table[0];
-  console.log(user_info.type);
 
   const RegiterButton = () => {
     return (
