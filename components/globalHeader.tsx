@@ -68,11 +68,7 @@ const GlobalHeader = () => {
               onClose={handleClose}
             >
               <MenuItem>
-                <Link href="/user/myPage">
-                  <Typography component="body" sx={{ flexGrow: 1 }}>
-                    My page
-                  </Typography>
-                </Link>
+                <Link href="/user/myPage">My page</Link>
               </MenuItem>
               <MenuItem onClick={signOut}>Logout</MenuItem>
             </Menu>

@@ -68,13 +68,7 @@ export const BookInput: React.FC<Props> = ({ item }) => {
     setIsbn(item.isbn[1].identifier);
   }, [item]);
 
-  const [addBook] = useMutation(ADD_BOOK, {
-    onCompleted: () => {
-      setTitle(" "), setAuthor(" "), setImage_url(" ");
-      setDescription(" ");
-      setIsbn("");
-    },
-  });
+  const [addBook] = useMutation(ADD_BOOK);
 
   const handleAddBook = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
