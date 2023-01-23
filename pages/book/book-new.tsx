@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -60,15 +60,21 @@ export const BookInput: React.FC<Props> = ({ item }) => {
   const [description, setDescription] = useState("");
   const [isbn, setIsbn] = useState("");
 
-  const RegisterInfo = () => {
+  useEffect(() => {
     setTitle(item.title);
     setAuthor(item.author);
     setImage_url(item.image);
     setDescription(item.description);
     setIsbn(item.isbn[1].identifier);
-  };
+  }, [item]);
 
-  const [addBook] = useMutation(ADD_BOOK);
+  const [addBook] = useMutation(ADD_BOOK, {
+    onCompleted: () => {
+      setTitle(" "), setAuthor(" "), setImage_url(" ");
+      setDescription(" ");
+      setIsbn("");
+    },
+  });
 
   const handleAddBook = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,12 +93,6 @@ export const BookInput: React.FC<Props> = ({ item }) => {
   return (
     <div>
       <Container component="main" maxWidth="xs">
-        <div>
-          <Button variant="contained" onClick={RegisterInfo}>
-            追加
-          </Button>
-        </div>
-
         <Box component="form" onSubmit={(e) => handleAddBook(e)} sx={{ mt: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>

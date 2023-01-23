@@ -55,17 +55,17 @@ const BookUpdate = () => {
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [image_url, setImage_url] = useState(" ");
-  const [description, setDescription] = useState(" ");
-  const [isbn, setIsbn] = useState(" ");
+  const [image_url, setImage_url] = useState("");
+  const [description, setDescription] = useState("");
+  const [isbn, setIsbn] = useState("");
 
-  const AddInfo = () => {
+  useEffect(() => {
     setTitle(book.title);
     setAuthor(book.author);
     setImage_url(book.image_url);
     setDescription(book.description);
     setIsbn(book.isbn);
-  };
+  }, [book]);
 
   const [updateBook] = useMutation(UPDATE_BOOK);
   const handleUpdateBook = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -86,8 +86,6 @@ const BookUpdate = () => {
   return (
     <div>
       <div>
-        <Button onClick={AddInfo}>情報を追加</Button>
-
         <Container component="main" maxWidth="xs">
           <Box
             component="form"
