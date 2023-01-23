@@ -64,13 +64,11 @@ const BookDetail = () => {
   });
   const user_info = !data2 ? [] : data2.users_table[0];
   const borrowingUser = user_info && user_info.id;
-  const userId = user && user.sub;
-  const AdminId = "auth0|638dc0cffeec6dcc9c073d43";
 
   const EditButton = () => {
     return (
       <>
-        {userId == AdminId && (
+        {user_info.type == "Owner" && (
           <>
             <div className="editBtn">
               <Button variant="contained">

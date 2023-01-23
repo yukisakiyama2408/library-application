@@ -6,6 +6,7 @@ export const GET_USER = gql`
       id
       name
       email
+      type
       borrowed_books {
         id
         borrowed_book_id

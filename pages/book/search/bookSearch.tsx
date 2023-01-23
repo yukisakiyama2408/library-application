@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Box, TextField, Container, Button } from "@mui/material";
 import { GET_BOOKS } from "../../../query/book/bookGet";
+import { GET_USER } from "../../../query/user/userGet";
 
 interface Book {
   id: number;
@@ -38,13 +39,17 @@ export const BookSearch = () => {
   };
 
   const { user } = useAuth0();
-  const userId = user && user.sub;
-  const AdminId = "auth0|638dc0cffeec6dcc9c073d43";
+  const { data: data2 } = useQuery(GET_USER, {
+    variables: { authId: user && user.sub },
+  });
+  console.log(data2);
+  const user_info = !data2 ? [] : data2.users_table[0];
+  console.log(user_info.type);
 
   const RegiterButton = () => {
     return (
       <>
-        {userId == AdminId && (
+        {user_info.type == "Owner" && (
           <div className="index-add-btn">
             <Button variant="contained" href="/book/search/book-google-search">
               REGISTER
