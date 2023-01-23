@@ -15,6 +15,7 @@ export const GET_USER = gql`
       borrowed_book_history {
         id
         borrowed_book_id
+        borrowing_user_id
       }
     }
   }

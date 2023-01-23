@@ -1,13 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_BORROWED_BOOK_HISTORY } from "../query/book/bookGet";
-import {
-  Card,
-  CardContent,
-  CardActionArea,
-  CardMedia,
-  Typography,
-  Grid,
-} from "@mui/material";
+import { Card, CardActionArea, CardMedia, Grid } from "@mui/material";
 
 interface Book {
   id: string;
@@ -33,6 +26,7 @@ type BookIds = {
 const BorrowedBookHitory: React.FC<BookIds> = ({ bookId }) => {
   const borrowedBookIds =
     bookId && bookId.map((bookid) => bookid.borrowed_book_id);
+  console.log(borrowedBookIds);
   const { data } = useQuery<Props>(GET_BORROWED_BOOK_HISTORY, {
     variables: { id: borrowedBookIds },
   });
@@ -43,6 +37,7 @@ const BorrowedBookHitory: React.FC<BookIds> = ({ bookId }) => {
     <>
       {borrowedBookIds && borrowedBookIds.length > 0 ? (
         <Grid container spacing={4} mt={0} px={4}>
+          {/* <div>合計{borrowedBookIds.length}冊読みました</div> */}
           {book_histories.map((book) => (
             <Grid
               item
