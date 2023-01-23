@@ -45,13 +45,36 @@ const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
     const BorrowDate = dayjs(date);
     const ReturnDate = dayjs(BorrowDate).add(2, "w").format();
     const DateDiff = dayjs(ReturnDate).diff(dayjs(ActualDate), "day");
+    console.log(DateDiff);
     return (
       <>
         <div>
-          {formatInTimeZone(
-            new Date(dayjs(date).add(2, "w").format()),
-            "JST",
-            "yyyy年MM月dd日"
+          {DateDiff >= 2 && (
+            <Typography variant="body2" color="text.secondary">
+              {formatInTimeZone(
+                new Date(dayjs(date).add(2, "w").format()),
+                "JST",
+                "yyyy年MM月dd日"
+              )}
+            </Typography>
+          )}
+          {DateDiff <= 1 && DateDiff >= 0 && (
+            <Typography variant="body2" color="red">
+              {formatInTimeZone(
+                new Date(dayjs(date).add(2, "w").format()),
+                "JST",
+                "yyyy年MM月dd日"
+              )}
+            </Typography>
+          )}
+          {DateDiff < 0 && (
+            <Typography variant="body2" color="red" sx={{ fontWeight: "bold" }}>
+              {formatInTimeZone(
+                new Date(dayjs(date).add(2, "w").format()),
+                "JST",
+                "yyyy年MM月dd日"
+              )}
+            </Typography>
           )}
         </div>
       </>
