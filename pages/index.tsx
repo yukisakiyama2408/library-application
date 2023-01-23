@@ -4,7 +4,10 @@ import { BookSearch } from "./book/search/bookSearch";
 import Login from "./user/login";
 
 const Home: NextPage = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
   return <>{isAuthenticated ? <BookSearch /> : <Login />}</>;
 };
 
