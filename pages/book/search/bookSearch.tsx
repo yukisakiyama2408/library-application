@@ -24,11 +24,14 @@ type Props = {
 export const BookSearch = () => {
   const { data } = useQuery<Props>(GET_BOOKS);
   const books = !data ? [] : data.books;
-
   const [showBooks, setShowBooks] = useState<Book[]>([]);
+
   useEffect(() => {
-    setShowBooks(books);
+    if (books) {
+      setShowBooks(books);
+    }
   }, [books]);
+
   const handleSearch = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

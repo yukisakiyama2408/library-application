@@ -60,11 +60,13 @@ const BookUpdate = () => {
   const [isbn, setIsbn] = useState("");
 
   useEffect(() => {
-    setTitle(book.title);
-    setAuthor(book.author);
-    setImage_url(book.image_url);
-    setDescription(book.description);
-    setIsbn(book.isbn);
+    if (book) {
+      setTitle(book.title);
+      setAuthor(book.author);
+      setImage_url(book.image_url);
+      setDescription(book.description);
+      setIsbn(book.isbn);
+    }
   }, [book]);
 
   const [updateBook] = useMutation(UPDATE_BOOK);

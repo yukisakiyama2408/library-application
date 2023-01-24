@@ -61,11 +61,13 @@ export const BookInput: React.FC<Props> = ({ item }) => {
   const [isbn, setIsbn] = useState("");
 
   useEffect(() => {
-    setTitle(item.title);
-    setAuthor(item.author);
-    setImage_url(item.image);
-    setDescription(item.description);
-    setIsbn(item.isbn[1].identifier);
+    if (item) {
+      setTitle(item.title);
+      setAuthor(item.author);
+      setImage_url(item.image);
+      setDescription(item.description);
+      setIsbn(item.isbn[1].identifier);
+    }
   }, [item]);
 
   const [addBook] = useMutation(ADD_BOOK);
