@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button, Container, Box, Grid } from "@mui/material";
+import { Button } from "@mui/material";
 
 const Login = () => {
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();

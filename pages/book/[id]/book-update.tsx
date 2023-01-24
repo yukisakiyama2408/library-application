@@ -3,7 +3,6 @@ import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
 import { GET_BOOK_INFO } from "../../../query/book/bookGet";
-import { DateRange } from "@mui/icons-material";
 
 const UPDATE_BOOK = gql`
   mutation updateBook(
