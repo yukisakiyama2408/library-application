@@ -1,11 +1,19 @@
 import { TextField, Button, Container } from "@mui/material";
 import { SetStateAction, useState } from "react";
-import { BookInput, BookItem } from "../book-new";
+import BookInput from "../book-new";
 
 interface ISBN {
   [key: string]: string;
   type: string;
   identifier: string;
+}
+
+interface BookItem {
+  title: string;
+  author: string;
+  image: string;
+  description: string;
+  isbn: Array<ISBN>;
 }
 
 interface Item {

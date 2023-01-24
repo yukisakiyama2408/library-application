@@ -40,7 +40,7 @@ interface ISBN {
   identifier: string;
 }
 
-export interface BookItem {
+interface BookItem {
   title: string;
   author: string;
   image: string;
@@ -52,7 +52,7 @@ interface Props {
   item: BookItem;
 }
 
-export const BookInput: React.FC<Props> = ({ item }) => {
+const BookInput: React.FC<Props> = ({ item }) => {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -146,3 +146,5 @@ export const BookInput: React.FC<Props> = ({ item }) => {
     </div>
   );
 };
+
+export default BookInput;

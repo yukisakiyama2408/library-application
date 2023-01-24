@@ -21,7 +21,7 @@ type Props = {
   books: Array<Book>;
 };
 
-export const BookSearch = () => {
+const BookSearch = () => {
   const { data } = useQuery<Props>(GET_BOOKS);
   const books = !data ? [] : data.books;
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
@@ -84,3 +84,5 @@ export const BookSearch = () => {
     </>
   );
 };
+
+export default BookSearch;
