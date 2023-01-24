@@ -24,13 +24,13 @@ type Props = {
 export const BookSearch = () => {
   const { data } = useQuery<Props>(GET_BOOKS);
   const books = !data ? [] : data.books;
-  const [showBooks, setShowBooks] = useState<Book[]>([]);
+  const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
 
-  useEffect(() => {
-    if (books) {
-      setShowBooks(books);
-    }
-  }, [books]);
+  // useEffect(() => {
+  //   if (books) {
+  //     setShowBooks(books);
+  //   }
+  // }, [books]);
 
   const handleSearch = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -38,7 +38,7 @@ export const BookSearch = () => {
     const result = books.filter((book) => {
       return book.title.match(e.target.value);
     });
-    setShowBooks(result);
+    setFilteredBooks(result);
   };
 
   const { user } = useAuth0();
@@ -76,7 +76,9 @@ export const BookSearch = () => {
             />
           </Box>
         </Container>
-        <div>{books && <BookIndex books={showBooks} />}</div>
+        <div>
+          <BookIndex books={filteredBooks.length ? filteredBooks : books} />
+        </div>
         <RegiterButton />
       </div>
     </>

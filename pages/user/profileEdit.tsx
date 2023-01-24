@@ -22,15 +22,13 @@ const UPDATE_USER = gql`
 const ProfileEdit = () => {
   const router = useRouter();
   const { user } = useAuth0();
-  console.log(user);
   const { data } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
+    onCompleted: (data) => {
+      setName(data.users_table[0].name);
+    },
   });
-  const userInfomation = !data ? [] : data.users_table[0];
-  const [name, setName] = useState(userInfomation.name);
-  useEffect(() => {
-    setName(userInfomation.name);
-  }, [userInfomation]);
+  const [name, setName] = useState(" ");
   const [updateUser] = useMutation(UPDATE_USER, {
     onCompleted: () => {
       setName(" ");

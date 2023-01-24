@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
 import { GET_BOOK_INFO } from "../../../query/book/bookGet";
+import { DateRange } from "@mui/icons-material";
 
 const UPDATE_BOOK = gql`
   mutation updateBook(
@@ -47,27 +48,22 @@ interface Book {
 
 const BookUpdate = () => {
   const router = useRouter();
-  const id = router.query.id;
-  const { data } = useQuery(GET_BOOK_INFO, {
-    variables: { id },
-  });
-  const book: Book = !data ? [] : data.books[0];
-
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
   const [isbn, setIsbn] = useState("");
-
-  useEffect(() => {
-    if (book) {
-      setTitle(book.title);
-      setAuthor(book.author);
-      setImage_url(book.image_url);
-      setDescription(book.description);
-      setIsbn(book.isbn);
-    }
-  }, [book]);
+  const id = router.query.id;
+  const { data } = useQuery(GET_BOOK_INFO, {
+    variables: { id },
+    onCompleted: (data) => {
+      setTitle(data.books[0].title);
+      setAuthor(data.books[0].author);
+      setImage_url(data.books[0].image_url);
+      setDescription(data.books[0].description);
+      setIsbn(data.books[0].isbn);
+    },
+  });
 
   const [updateBook] = useMutation(UPDATE_BOOK);
   const handleUpdateBook = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -82,7 +78,7 @@ const BookUpdate = () => {
         isbn: isbn,
       },
     });
-    router.push(`/book/${book.id}`);
+    router.push(`/book/${id}`);
   };
 
   return (
