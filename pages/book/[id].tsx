@@ -5,6 +5,7 @@ import Link from "next/link";
 import BookDelete from "../../components/book-delete";
 import BookBorrow from "../../components/book-borrow";
 import GlobalHeader from "../../components/globalHeader";
+import { GET_BOOK_INFO } from "../../query/book/bookGet";
 import { GET_USER } from "../../query/user/userGet";
 import {
   Container,
@@ -14,21 +15,6 @@ import {
   Card,
   CardMedia,
 } from "@mui/material";
-
-const GET_BOOK = gql`
-  query getBook($id: Int!) {
-    books(where: { id: { _eq: $id } }) {
-      id
-      title
-      author
-      image_url
-      description
-      borrowed_books {
-        id
-      }
-    }
-  }
-`;
 
 interface Book {
   id: number;
@@ -50,7 +36,7 @@ type BorrowBook = {
 const BookDetail = () => {
   const router = useRouter();
   const id = router.query.id;
-  const { data } = useQuery(GET_BOOK, {
+  const { data } = useQuery(GET_BOOK_INFO, {
     variables: { id },
   });
   const book: Book = !data ? [] : data.books[0];
