@@ -20,7 +20,7 @@ const AuthApolloProvider: FC<{ children: ReactNode }> = ({ children }) => {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
-const secrets = require("/secret/secrets.json");
+const secrets = require("secret/secrets.json");
 
 function MyApp({
   Component,
