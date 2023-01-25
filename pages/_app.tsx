@@ -29,6 +29,7 @@ function MyApp({
     <Auth0Provider
       domain="dev-95au-j9j.us.auth0.com"
       clientId="je55u4Ols3LCJTZaKjPCdcgt1Xzh0ALN"
+      // redirectUri="http://localhost:3000"
       redirectUri="https://fgn-library.vercel.app/"
       audience="https://fgn-library.hasura.app/v1/graphql"
     >

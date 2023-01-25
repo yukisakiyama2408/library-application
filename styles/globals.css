@@ -11,6 +11,12 @@ a {
   text-decoration: none;
 }
 
+.loadingCircle {
+  display: grid;
+  place-items: center;
+  margin-top: 300px;
+}
+
 .book-table {
   width: 250px;
 }
