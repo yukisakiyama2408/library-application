@@ -80,36 +80,40 @@ const BookDetail = () => {
       <div>
         <GlobalHeader />
       </div>
-      <Container>
-        <div className="image-section">
-          <Card sx={{ maxWidth: 450 }}>
-            <CardMedia
-              component="img"
-              height="400"
-              image={book.image_url}
-              alt="本の表紙"
-              sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-            />
-          </Card>
-        </div>
-        <div className="info-section">
-          <h2> {book.title}</h2>
-          <p>{book.author}</p>
-        </div>
-        <p>{book.description}</p>
-      </Container>
-      <div>
-        {borrowBook && borrowBook.length > 0 ? (
-          <div>貸出中</div>
-        ) : (
+      {book && (
+        <div>
+          <Container>
+            <div className="image-section">
+              <Card sx={{ maxWidth: 450 }}>
+                <CardMedia
+                  component="img"
+                  height="400"
+                  image={book.image_url}
+                  alt="本の表紙"
+                  sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+                />
+              </Card>
+            </div>
+            <div className="info-section">
+              <h2> {book.title}</h2>
+              <p>{book.author}</p>
+            </div>
+            <p>{book.description}</p>
+          </Container>
           <div>
-            <BookBorrow id={book.id} borrowingUser={borrowingUser} />
+            {borrowBook && borrowBook.length > 0 ? (
+              <div>貸出中</div>
+            ) : (
+              <div>
+                <BookBorrow id={book.id} borrowingUser={borrowingUser} />
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div>
-        <EditButton />
-      </div>
+          <div>
+            <EditButton />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
