@@ -23,6 +23,10 @@ export const GET_BOOK_INFO = gql`
       image_url
       description
       isbn
+      borrowed_books {
+        id
+        borrowed_book_id
+      }
     }
   }
 `;

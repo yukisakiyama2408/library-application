@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";

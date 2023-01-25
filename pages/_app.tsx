@@ -20,6 +20,8 @@ const AuthApolloProvider: FC<{ children: ReactNode }> = ({ children }) => {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
+const secrets = require("/secret/secrets.json");
+
 function MyApp({
   Component,
   emotionCache = clientSideEmotionCache,
@@ -27,11 +29,11 @@ function MyApp({
 }: MyAppProps) {
   return (
     <Auth0Provider
-      domain="dev-95au-j9j.us.auth0.com"
-      clientId="je55u4Ols3LCJTZaKjPCdcgt1Xzh0ALN"
+      domain={secrets.NEXT_PUBLIC_AUTH_DOMAIN}
+      clientId={secrets.NEXT_PUBLIC_AUTH0_CLIENT_ID}
       // redirectUri="http://localhost:3000"
-      redirectUri="https://fgn-library.vercel.app/"
-      audience="https://fgn-library.hasura.app/v1/graphql"
+      redirectUri={secrets.NEXT_PUBLIC_HASURA_URL}
+      audience={secrets.NEXT_PUBLIC_HASURA_AUDIENCE}
     >
       <CacheProvider value={emotionCache}>
         <Head>
