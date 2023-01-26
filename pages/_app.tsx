@@ -20,7 +20,7 @@ const AuthApolloProvider: FC<{ children: ReactNode }> = ({ children }) => {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
-const secrets = require("../secret/secrets.json");
+const secrets = require("../secret/link.json");
 
 function MyApp({
   Component,
@@ -31,8 +31,8 @@ function MyApp({
     <Auth0Provider
       domain={secrets.NEXT_PUBLIC_AUTH_DOMAIN}
       clientId={secrets.NEXT_PUBLIC_AUTH0_CLIENT_ID}
-      // redirectUri="http://localhost:3000"
-      redirectUri={secrets.NEXT_PUBLIC_REDIRECT_URL}
+      redirectUri="http://localhost:3000"
+      // redirectUri={secrets.NEXT_PUBLIC_REDIRECT_URL}
       audience={secrets.NEXT_PUBLIC_HASURA_AUDIENCE}
     >
       <CacheProvider value={emotionCache}>

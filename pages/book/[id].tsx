@@ -80,40 +80,46 @@ const BookDetail = () => {
       <div>
         <GlobalHeader />
       </div>
-      {book && (
-        <div>
-          <Container>
-            <div className="image-section">
-              <Card sx={{ maxWidth: 450 }}>
-                <CardMedia
-                  component="img"
-                  height="400"
-                  image={book.image_url}
-                  alt="本の表紙"
-                  sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-                />
-              </Card>
-            </div>
-            <div className="info-section">
-              <h2> {book.title}</h2>
-              <p>{book.author}</p>
-            </div>
-            <p>{book.description}</p>
-          </Container>
-          <div>
-            {borrowBook && borrowBook.length > 0 ? (
-              <div>貸出中</div>
-            ) : (
-              <div>
-                <BookBorrow id={book.id} borrowingUser={borrowingUser} />
-              </div>
-            )}
+      <div className="book-detail-section">
+        <Container component="main" maxWidth="md">
+          <div className="image-section">
+            <Card sx={{ maxWidth: 250 }}>
+              <CardMedia
+                component="img"
+                height="350"
+                image={book.image_url}
+                alt="本の表紙"
+                sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+              />
+            </Card>
           </div>
-          <div>
-            <EditButton />
+          <div className="info-section">
+            <Typography gutterBottom variant="h5" component="div">
+              {book.title}
+            </Typography>
+            <Typography gutterBottom variant="subtitle1" component="div">
+              著者：{book.author}
+            </Typography>
+            <Typography gutterBottom variant="body1" component="div">
+              {book.description}
+            </Typography>
+            <div>
+              {borrowBook && borrowBook.length > 0 ? (
+                <Typography gutterBottom variant="body1" component="div">
+                  貸出状況： 貸出中
+                </Typography>
+              ) : (
+                <div>
+                  <BookBorrow id={book.id} borrowingUser={borrowingUser} />
+                </div>
+              )}
+            </div>
+            <div>
+              <EditButton />
+            </div>
           </div>
-        </div>
-      )}
+        </Container>
+      </div>
     </div>
   );
 };
