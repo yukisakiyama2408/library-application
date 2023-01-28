@@ -1,6 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import BookBorrow from "./book-borrow";
 import { useAuth0 } from "@auth0/auth0-react";
+import { GET_USER } from "../query/user/userGet";
 import { useState } from "react";
 import {
   Typography,
@@ -14,15 +15,6 @@ import {
   Button,
 } from "@mui/material";
 
-const GET_USER = gql`
-  query getUser($authId: String!) {
-    users_table(where: { authId: { _eq: $authId } }) {
-      id
-      name
-    }
-  }
-`;
-
 interface Book {
   id: number;
   title: string;
@@ -33,19 +25,24 @@ interface Book {
   };
 }
 
-type BookProps = {
+interface BookProps {
   books: Array<Book>;
-};
+}
 
-const BookIndex: React.FC<BookProps> = (books) => {
+export interface User {
+  id: number;
+  type: string;
+}
+
+export const BookIndex: React.FC<BookProps> = (books) => {
   const { user } = useAuth0();
-  const { data: data2 } = useQuery(GET_USER, {
+  const { data } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
   });
-  const user_info = !data2 ? [] : data2.users_table[0];
+  const user_info = !data ? [] : data.users_table[0];
+
   const borrowingUser = user_info && user_info.id;
   const Books = books && books.books;
-
   const [loadIndex, setLoadIndex] = useState(10);
   const displayMore = () => {
     setLoadIndex(loadIndex + 10);
@@ -79,6 +76,20 @@ const BookIndex: React.FC<BookProps> = (books) => {
           <div>
             <Button onClick={displayLess} variant="contained">
               縮める
+            </Button>
+          </div>
+        )}
+      </>
+    );
+  };
+
+  const RegiterButton = () => {
+    return (
+      <>
+        {user_info && user_info.type == "Owner" && (
+          <div className="index-add-btn">
+            <Button variant="contained" href="/book/search/book-google-search">
+              REGISTER
             </Button>
           </div>
         )}
@@ -140,8 +151,9 @@ const BookIndex: React.FC<BookProps> = (books) => {
       <div>
         <DisplayButton />
       </div>
+      <div>
+        <RegiterButton />
+      </div>
     </>
   );
 };
-
-export default BookIndex;
