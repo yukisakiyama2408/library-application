@@ -6,7 +6,7 @@ export const LimitDate = (date: Date) => {
   const now = dayjs();
   const ActualDate = now.format();
   const BorrowDate = dayjs(date);
-  const ReturnDate = dayjs(BorrowDate).add(2, "w").format();
+  const ReturnDate = dayjs(BorrowDate.format()).add(2, "w").format();
   const DateDiff = dayjs(ReturnDate).diff(dayjs(ActualDate), "day");
   return (
     <>
