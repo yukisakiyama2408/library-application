@@ -26,17 +26,21 @@ const MyPage = () => {
       <div className="myPage">
         <Container>
           <div>
-            <Typography
-              gutterBottom
-              variant="h4"
-              component="div"
-              className="profileInfo"
-            >
-              {user_info.name}さんのホーム
-            </Typography>
-            <Link href="/user/profileEdit" className="profileInfo">
-              <EditIcon />
-            </Link>
+            <div>
+              <Typography
+                gutterBottom
+                variant="h4"
+                component="div"
+                className="profileInfo"
+              >
+                {user_info.name}さんのホーム
+              </Typography>
+            </div>
+            <div>
+              <Link href="/user/profileEdit" className="profileInfo">
+                <EditIcon />
+              </Link>
+            </div>
           </div>
           <div className="myPageBooks">
             <div>
@@ -45,7 +49,9 @@ const MyPage = () => {
                   現在借りている本
                 </Typography>
               </div>
-              <Divider />
+              <div>
+                <Divider />
+              </div>
               <div>
                 <BorrowedBook bookId={borrowedBook_info} />
               </div>
