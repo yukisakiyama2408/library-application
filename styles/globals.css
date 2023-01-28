@@ -51,6 +51,12 @@ a {
   margin-top: 10px;
 }
 
+.detail-book-img {
+  height: 350px;
+  width: 200px;
+  object-fit: contain;
+}
+
 .editBtn {
   float: left;
   margin: 10px;
@@ -86,13 +92,13 @@ a {
 }
 
 .image-section {
-  display: grid;
-  place-items: center;
+  float: left;
 }
 
 .info-section {
   margin-top: 30px;
 }
+
 * {
   box-sizing: border-box;
 }

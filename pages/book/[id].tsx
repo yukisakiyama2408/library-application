@@ -11,9 +11,14 @@ import {
   Container,
   Typography,
   Button,
-  Box,
   Card,
   CardMedia,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableContainer,
+  Paper,
 } from "@mui/material";
 
 interface Book {
@@ -80,46 +85,75 @@ const BookDetail = () => {
       <div>
         <GlobalHeader />
       </div>
-      <div className="book-detail-section">
-        <Container component="main" maxWidth="md">
-          <div className="image-section">
-            <Card sx={{ maxWidth: 250 }}>
-              <CardMedia
-                component="img"
-                height="350"
-                image={book.image_url}
-                alt="本の表紙"
-                sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
-              />
-            </Card>
-          </div>
-          <div className="info-section">
-            <Typography gutterBottom variant="h5" component="div">
-              {book.title}
-            </Typography>
-            <Typography gutterBottom variant="subtitle1" component="div">
-              著者：{book.author}
-            </Typography>
-            <Typography gutterBottom variant="body1" component="div">
-              {book.description}
-            </Typography>
-            <div>
-              {borrowBook && borrowBook.length > 0 ? (
-                <Typography gutterBottom variant="body1" component="div">
-                  貸出状況： 貸出中
-                </Typography>
-              ) : (
-                <div>
-                  <BookBorrow id={book.id} borrowingUser={borrowingUser} />
+      <Container component="main" maxWidth="md">
+        <Table sx={{ minWidth: 250 }} aria-label="simple table">
+          <TableBody>
+            <TableRow
+              key={book.id}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell align="left" className="book-table">
+                <div className="detail-book-img">
+                  <img
+                    src={book.image_url}
+                    alt="本の表紙"
+                    className="detail-book-img"
+                  />
                 </div>
-              )}
-            </div>
-            <div>
-              <EditButton />
-            </div>
-          </div>
-        </Container>
-      </div>
+              </TableCell>
+              <TableCell align="left">
+                <div className="detail-book-infos">
+                  <div className="detail-book-info">
+                    <Typography gutterBottom variant="h6" component="div">
+                      {book.title}
+                    </Typography>
+                    <Typography
+                      gutterBottom
+                      variant="subtitle1"
+                      component="div"
+                    >
+                      著者: {book.author}
+                    </Typography>
+                    <div>
+                      {borrowBook && borrowBook.length > 0 ? (
+                        <Typography
+                          gutterBottom
+                          variant="body1"
+                          component="div"
+                        >
+                          貸出状況： 貸出中
+                        </Typography>
+                      ) : (
+                        <div>
+                          <BookBorrow
+                            id={book.id}
+                            borrowingUser={borrowingUser}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <EditButton />
+                    </div>
+                  </div>
+                </div>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Container>
+      <Container component="main" maxWidth="md">
+        <div>
+          <Typography gutterBottom variant="body1" component="div">
+            書籍説明：
+          </Typography>
+        </div>
+        <div>
+          <Typography gutterBottom variant="body2" component="div">
+            {book.description}
+          </Typography>
+        </div>
+      </Container>
     </div>
   );
 };
