@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth0 } from "@auth0/auth0-react";
 import { User } from "../../components/book-index";
@@ -36,16 +37,29 @@ type BorrowBook = {
 };
 
 interface UserProps {
-  user_info: User;
+  userId: number;
+  userType: String;
 }
 
 const BookDetail = () => {
   const router = useRouter();
   const id = router.query.id;
+  const [bookId, setBookId] = useState(null);
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [image_url, setImage_url] = useState("");
+  const [description, setDescription] = useState("");
   const { data } = useQuery(GET_BOOK_INFO, {
     variables: { id },
+    onCompleted: (data) => {
+      setBookId(data.books[0].id);
+      setTitle(data.books[0].title);
+      setAuthor(data.books[0].author);
+      setImage_url(data.books[0].image_url);
+      setDescription(data.books[0].description);
+    },
   });
-
+  console.log(typeof bookId);
   const book: Book = !data ? [] : data.books[0];
   const borrowBook =
     book.borrowed_books &&
@@ -67,15 +81,17 @@ const BookDetail = () => {
               <Button variant="contained">
                 <Link
                   href="/book/[id]/book-update"
-                  as={`/book/${book.id}/book-update`}
+                  as={`/book/${bookId}/book-update`}
                 >
                   Update
                 </Link>
               </Button>
             </div>
-            <div className="editBtn">
-              <BookDelete id={book.id} />
-            </div>
+            {bookId && (
+              <div className="editBtn">
+                <BookDelete id={bookId} />
+              </div>
+            )}
           </>
         )}
       </>
@@ -91,13 +107,13 @@ const BookDetail = () => {
         <Table sx={{ minWidth: 250 }} aria-label="simple table">
           <TableBody>
             <TableRow
-              key={book.id}
+              key={bookId}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell align="left" className="book-table">
                 <div className="detail-book-img">
                   <img
-                    src={book.image_url}
+                    src={image_url}
                     alt="本の表紙"
                     className="detail-book-img"
                   />
@@ -107,14 +123,14 @@ const BookDetail = () => {
                 <div className="detail-book-infos">
                   <div className="detail-book-info">
                     <Typography gutterBottom variant="h6" component="div">
-                      {book.title}
+                      {title}
                     </Typography>
                     <Typography
                       gutterBottom
                       variant="subtitle1"
                       component="div"
                     >
-                      著者: {book.author}
+                      著者: {author}
                     </Typography>
                     <div>
                       {borrowBook && borrowBook.length > 0 ? (
@@ -152,7 +168,7 @@ const BookDetail = () => {
         </div>
         <div>
           <Typography gutterBottom variant="body2" component="div">
-            {book.description}
+            {description}
           </Typography>
         </div>
       </Container>

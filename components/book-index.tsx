@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import BookBorrow from "./book-borrow";
+import BookDetail from "../pages/book/[id]";
 import { useAuth0 } from "@auth0/auth0-react";
 import { GET_USER } from "../query/user/userGet";
 import { useState } from "react";
@@ -35,13 +36,21 @@ export interface User {
 }
 
 export const BookIndex: React.FC<BookProps> = (books) => {
+  const [userId, setUserId] = useState(0);
+  const [userType, setUserType] = useState("");
   const { user } = useAuth0();
   const { data } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
+    onCompleted: (data) => {
+      setUserId(data.users_table[0].id);
+      setUserType(data.users_table[0].type);
+    },
   });
-  const user_info = !data ? [] : data.users_table[0];
 
-  const borrowingUser = user_info && user_info.id;
+  // {
+  //   data && <BookDetail userId={userId} userType={userType} />;
+  // }
+
   const Books = books && books.books;
   const [loadIndex, setLoadIndex] = useState(10);
   const displayMore = () => {
@@ -86,7 +95,7 @@ export const BookIndex: React.FC<BookProps> = (books) => {
   const RegiterButton = () => {
     return (
       <>
-        {user_info && user_info.type == "Owner" && (
+        {userType && userType == "Owner" && (
           <div className="index-add-btn">
             <Button variant="contained" href="/book/search/book-google-search">
               REGISTER
@@ -134,10 +143,7 @@ export const BookIndex: React.FC<BookProps> = (books) => {
                         </div>
                       ) : (
                         <div>
-                          <BookBorrow
-                            id={book.id}
-                            borrowingUser={borrowingUser}
-                          />
+                          <BookBorrow id={book.id} borrowingUser={userId} />
                         </div>
                       )}
                     </div>

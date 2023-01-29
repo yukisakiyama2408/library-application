@@ -20,9 +20,9 @@ const RETURN_BOOK = gql`
   }
 `;
 
-type BookId = {
+interface BookId {
   bookId: string;
-};
+}
 
 const ReturnBook: React.FC<BookId> = ({ bookId }) => {
   const router = useRouter();
