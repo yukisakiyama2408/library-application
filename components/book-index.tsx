@@ -47,10 +47,6 @@ export const BookIndex: React.FC<BookProps> = (books) => {
     },
   });
 
-  // {
-  //   data && <BookDetail userId={userId} userType={userType} />;
-  // }
-
   const Books = books && books.books;
   const [loadIndex, setLoadIndex] = useState(10);
   const displayMore = () => {
@@ -128,6 +124,17 @@ export const BookIndex: React.FC<BookProps> = (books) => {
                 <TableCell align="left">
                   <div className="index-book-infos">
                     <div className="index-book-info">
+                      {/* <div>
+                        <Link
+                          href={{
+                            pathname: "/book/[id]",
+                            query: { id: book.id },
+                          }}
+                          as={`/book/${book.id}`}
+                        >
+                          About us
+                        </Link>
+                      </div> */}
                       <Link href={`/book/${book.id}`} variant="h6">
                         {book.title}
                       </Link>

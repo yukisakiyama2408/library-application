@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth0 } from "@auth0/auth0-react";
+
 import { User } from "../../components/book-index";
 import Link from "next/link";
 import BookDelete from "../../components/book-delete";
@@ -17,6 +18,7 @@ import {
   TableBody,
   TableCell,
   TableRow,
+  CircularProgress,
 } from "@mui/material";
 
 interface Book {
@@ -44,12 +46,12 @@ interface UserProps {
 const BookDetail = () => {
   const router = useRouter();
   const id = router.query.id;
-  const [bookId, setBookId] = useState(null);
+  const [bookId, setBookId] = useState(0);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
-  const { data } = useQuery(GET_BOOK_INFO, {
+  const { data, loading } = useQuery(GET_BOOK_INFO, {
     variables: { id },
     onCompleted: (data) => {
       setBookId(data.books[0].id);
@@ -59,7 +61,7 @@ const BookDetail = () => {
       setDescription(data.books[0].description);
     },
   });
-  console.log(typeof bookId);
+
   const book: Book = !data ? [] : data.books[0];
   const borrowBook =
     book.borrowed_books &&
@@ -71,6 +73,16 @@ const BookDetail = () => {
   });
   const user_info = !data2 ? [] : data2.users_table[0];
   const borrowingUser = user_info && user_info.id;
+
+  if (loading) {
+    return (
+      <>
+        <div className="loadingCircle">
+          <CircularProgress />
+        </div>
+      </>
+    );
+  }
 
   const EditButton = () => {
     return (
