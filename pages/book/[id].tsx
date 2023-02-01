@@ -2,8 +2,6 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth0 } from "@auth0/auth0-react";
-
-import { User } from "../../components/book-index";
 import Link from "next/link";
 import BookDelete from "../../components/book-delete";
 import BookBorrow from "../../components/book-borrow";
@@ -51,6 +49,7 @@ const BookDetail = () => {
   const [author, setAuthor] = useState("");
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
+
   const { data, loading } = useQuery(GET_BOOK_INFO, {
     variables: { id },
     onCompleted: (data) => {

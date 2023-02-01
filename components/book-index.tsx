@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client";
 import BookBorrow from "./book-borrow";
-import BookDetail from "../pages/book/[id]";
 import { useAuth0 } from "@auth0/auth0-react";
 import { GET_USER } from "../query/user/userGet";
 import { useState } from "react";
@@ -124,17 +123,6 @@ export const BookIndex: React.FC<BookProps> = (books) => {
                 <TableCell align="left">
                   <div className="index-book-infos">
                     <div className="index-book-info">
-                      {/* <div>
-                        <Link
-                          href={{
-                            pathname: "/book/[id]",
-                            query: { id: book.id },
-                          }}
-                          as={`/book/${book.id}`}
-                        >
-                          About us
-                        </Link>
-                      </div> */}
                       <Link href={`/book/${book.id}`} variant="h6">
                         {book.title}
                       </Link>

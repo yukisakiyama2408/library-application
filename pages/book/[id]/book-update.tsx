@@ -1,5 +1,5 @@
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
 import { GET_BOOK_INFO } from "../../../query/book/bookGet";
@@ -12,6 +12,7 @@ const UPDATE_BOOK = gql`
     $image_url: String!
     $description: String!
     $isbn: String!
+    $placed_shelf_id: Int!
   ) {
     update_books(
       where: { id: { _eq: $id } }
@@ -21,6 +22,7 @@ const UPDATE_BOOK = gql`
         image_url: $image_url
         description: $description
         isbn: $isbn
+        placed_shelf_id: $placed_shelf_id
       }
     ) {
       affected_rows
@@ -31,6 +33,7 @@ const UPDATE_BOOK = gql`
         image_url
         description
         isbn
+        placed_shelf_id
       }
     }
   }
@@ -43,6 +46,7 @@ interface Book {
   image_url: string;
   description: string;
   isbn: string;
+  placed_shelf_id: number;
 }
 
 const BookUpdate = () => {
@@ -52,6 +56,7 @@ const BookUpdate = () => {
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
   const [isbn, setIsbn] = useState("");
+  const [placedShelfId, setPlacedShelfId] = useState("");
   const id = router.query.id;
   const { data } = useQuery(GET_BOOK_INFO, {
     variables: { id },
@@ -61,6 +66,7 @@ const BookUpdate = () => {
       setImage_url(data.books[0].image_url);
       setDescription(data.books[0].description);
       setIsbn(data.books[0].isbn);
+      setPlacedShelfId(data.books[0].placed_shelf_id);
     },
   });
 
@@ -75,6 +81,7 @@ const BookUpdate = () => {
         image_url: image_url,
         description: description,
         isbn: isbn,
+        placed_shelf_id: placedShelfId,
       },
     });
     router.push(`/book/${id}`);
@@ -133,6 +140,15 @@ const BookUpdate = () => {
                   placeholder="ISBN"
                   value={isbn}
                   onChange={(e) => setIsbn(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="text"
+                  name="placedShelfId"
+                  placeholder="本棚のID 1 or 2"
+                  value={placedShelfId}
+                  onChange={(e) => setPlacedShelfId(e.target.value)}
                 />
               </Grid>
             </Grid>
