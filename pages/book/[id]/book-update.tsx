@@ -2,6 +2,9 @@ import { gql, useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import { GET_BOOK_INFO } from "../../../query/book/bookGet";
 
 const UPDATE_BOOK = gql`
@@ -142,14 +145,21 @@ const BookUpdate = () => {
                   onChange={(e) => setIsbn(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  type="text"
-                  name="placedShelfId"
-                  placeholder="本棚のID 1 or 2"
+              <Grid item xs={30}>
+                <InputLabel>本棚</InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
                   value={placedShelfId}
                   onChange={(e) => setPlacedShelfId(e.target.value)}
-                />
+                  label="棚のID"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={1}>イベントスペース</MenuItem>
+                  <MenuItem value={2}>Social Lounge</MenuItem>
+                </Select>
               </Grid>
             </Grid>
             <Button variant="contained" type="submit">
