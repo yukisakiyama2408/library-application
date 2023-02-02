@@ -3,6 +3,9 @@ import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { Box, TextField, Container, Grid, Button } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 const ADD_BOOK = gql`
   mutation (
@@ -11,6 +14,7 @@ const ADD_BOOK = gql`
     $image_url: String!
     $description: String!
     $isbn: String!
+    $placed_shelf_id: Int!
   ) {
     insert_books(
       objects: {
@@ -19,6 +23,7 @@ const ADD_BOOK = gql`
         image_url: $image_url
         description: $description
         isbn: $isbn
+        placed_shelf_id: $placed_shelf_id
       }
     ) {
       affected_rows
@@ -29,6 +34,7 @@ const ADD_BOOK = gql`
         image_url
         description
         isbn
+        placed_shelf_id
       }
     }
   }
@@ -46,6 +52,7 @@ interface BookItem {
   image: string;
   description: string;
   isbn: Array<ISBN>;
+  placed_shelf_id: number;
 }
 
 interface Props {
@@ -59,6 +66,7 @@ const BookInput: React.FC<Props> = ({ item }) => {
   const [image_url, setImage_url] = useState("");
   const [description, setDescription] = useState("");
   const [isbn, setIsbn] = useState("");
+  const [placedShelfId, setPlacedShelfId] = useState("");
 
   useEffect(() => {
     if (item) {
@@ -81,6 +89,7 @@ const BookInput: React.FC<Props> = ({ item }) => {
         image_url: image_url,
         description: description,
         isbn: isbn,
+        placed_shelf_id: placedShelfId,
       },
     });
     router.push("/");
@@ -134,6 +143,22 @@ const BookInput: React.FC<Props> = ({ item }) => {
                 value={isbn}
                 onChange={(e) => setIsbn(e.target.value)}
               />
+            </Grid>
+            <Grid item xs={30}>
+              <InputLabel>本棚</InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={placedShelfId}
+                onChange={(e) => setPlacedShelfId(e.target.value)}
+                label="棚のID"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={1}>イベントスペース</MenuItem>
+                <MenuItem value={2}>Social Lounge</MenuItem>
+              </Select>
             </Grid>
           </Grid>
           <div className="register-button">
