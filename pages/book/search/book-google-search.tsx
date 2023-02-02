@@ -14,6 +14,7 @@ interface BookItem {
   image: string;
   description: string;
   isbn: Array<ISBN>;
+  placed_shelf_id: number;
 }
 
 interface Item {
