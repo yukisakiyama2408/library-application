@@ -57,7 +57,7 @@ export interface User {
 export const BookShelfIndex: React.FC<PropsShelf> = ({ shelfId }) => {
   console.log(shelfId);
   const { data, loading } = useQuery(GET_SHELF_BOOKS, {
-    variables: shelfId,
+    variables: { placed_shelf_id: shelfId },
   });
   const books = !data ? [] : data.books;
   console.log(books);
