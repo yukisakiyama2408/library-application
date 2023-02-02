@@ -51,7 +51,7 @@ const BookDetail = () => {
   const [description, setDescription] = useState("");
 
   const { data, loading } = useQuery(GET_BOOK_INFO, {
-    variables: { id },
+    variables: { id: id },
     onCompleted: (data) => {
       setBookId(data.books[0].id);
       setTitle(data.books[0].title);
