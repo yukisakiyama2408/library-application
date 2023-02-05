@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useAuth0 } from "@auth0/auth0-react";
 import Link from "next/link";
-import BookDelete from "../../components/book-delete";
-import BookBorrow from "../../components/book-borrow";
+import BookDelete from "../../components/book/book-delete";
+import BookBorrow from "../../components/book/book-borrow";
 import GlobalHeader from "../../components/globalHeader";
 import { GET_BOOK_INFO } from "../../query/book/bookGet";
 import { GET_USER } from "../../query/user/userGet";
@@ -56,7 +56,6 @@ const BookDetail = () => {
       console.log(args);
     },
     onCompleted: (data) => {
-      console.log("hoge");
       setBookId(data.books[0].id);
       setTitle(data.books[0].title);
       setAuthor(data.books[0].author);

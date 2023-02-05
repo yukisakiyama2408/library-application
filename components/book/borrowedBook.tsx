@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import ReturnBook from "./returnBook";
 import { LimitDate } from "./returnDate";
 import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
-import { GET_BORROWED_BOOK_INFO } from "../query/book/bookGet";
+import { GET_BORROWED_BOOK_INFO } from "../../query/book/bookGet";
 
 interface Book {
   date: Date;

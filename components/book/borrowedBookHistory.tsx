@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { GET_BORROWED_BOOK_HISTORY } from "../query/book/bookGet";
+import { GET_BORROWED_BOOK_HISTORY } from "../../query/book/bookGet";
 import { Card, CardActionArea, CardMedia, Grid } from "@mui/material";
 
 interface Book {

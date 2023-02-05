@@ -1,5 +1,5 @@
 import { useState, useEffect, ChangeEvent } from "react";
-import { BookIndex } from "../../../components/book-index";
+import { BookIndex } from "../../../components/book/book-index";
 import GlobalHeader from "../../../components/globalHeader";
 import { useQuery } from "@apollo/client";
 import { Box, TextField, Container, Button } from "@mui/material";

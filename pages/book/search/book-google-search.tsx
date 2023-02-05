@@ -59,14 +59,14 @@ const BooksGoogleSearch = () => {
 
   return (
     <>
-      <div>
-        <Container>
+      <div className="register-search-form">
+        <Container component="main" maxWidth="xs">
           <form onSubmit={searchBooks}>
             <TextField
               onChange={handleNewBooks}
               value={value}
               id="outlined-basic"
-              label="Outlined"
+              label="検索ワード"
               variant="outlined"
             />
             <Button variant="contained" type="submit">
@@ -75,7 +75,7 @@ const BooksGoogleSearch = () => {
           </form>
         </Container>
       </div>
-      {item && <BookInput item={item} />}
+      <div className="register-form">{item && <BookInput item={item} />}</div>
     </>
   );
 };

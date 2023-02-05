@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import BookBorrow from "./book-borrow";
 import { useAuth0 } from "@auth0/auth0-react";
-import { GET_USER } from "../query/user/userGet";
+import { GET_USER } from "../../query/user/userGet";
 import { useState } from "react";
 import {
   Typography,
@@ -14,6 +14,22 @@ import {
   Link,
   Button,
 } from "@mui/material";
+
+export const GET_SHELF_BOOKS = gql`
+  query GetShelfBooks($placed_shelf_id: Int!) {
+    books(where: { placed_shelf_id: { _eq: $placed_shelf_id } }) {
+      id
+      title
+      author
+      image_url
+      description
+      isbn
+      borrowed_books {
+        id
+      }
+    }
+  }
+`;
 
 interface Book {
   id: number;
@@ -29,24 +45,31 @@ interface BookProps {
   books: Array<Book>;
 }
 
+export interface PropsShelf {
+  shelfId: string;
+}
+
 export interface User {
   id: number;
   type: string;
 }
 
-export const BookIndex: React.FC<BookProps> = (books) => {
+export const BookShelfIndex: React.FC<PropsShelf> = ({ shelfId }) => {
+  console.log(shelfId);
+  const { data, loading } = useQuery(GET_SHELF_BOOKS, {
+    variables: { placed_shelf_id: shelfId },
+  });
+  const books = !data ? [] : data.books;
+  console.log(books);
   const [userId, setUserId] = useState(0);
-  const [userType, setUserType] = useState("");
   const { user } = useAuth0();
-  const { data } = useQuery(GET_USER, {
+  const { data: data2 } = useQuery(GET_USER, {
     variables: { authId: user && user.sub },
     onCompleted: (data) => {
       setUserId(data.users_table[0].id);
-      setUserType(data.users_table[0].type);
     },
   });
 
-  const Books = books && books.books;
   const [loadIndex, setLoadIndex] = useState(10);
   const displayMore = () => {
     setLoadIndex(loadIndex + 10);
@@ -66,7 +89,7 @@ export const BookIndex: React.FC<BookProps> = (books) => {
             </Button>
           </div>
         )}
-        {loadIndex > 10 && loadIndex < Books.length && (
+        {loadIndex > 10 && loadIndex < books.length && (
           <div>
             <Button onClick={displayLess} variant="contained">
               縮める
@@ -76,7 +99,7 @@ export const BookIndex: React.FC<BookProps> = (books) => {
             </Button>
           </div>
         )}
-        {loadIndex > Books.length && (
+        {loadIndex > books.length && (
           <div>
             <Button onClick={displayLess} variant="contained">
               縮める
@@ -86,27 +109,16 @@ export const BookIndex: React.FC<BookProps> = (books) => {
       </>
     );
   };
-
-  const RegiterButton = () => {
-    return (
-      <>
-        {userType && userType == "Owner" && (
-          <div className="index-add-btn">
-            <Button variant="contained" href="/book/search/book-google-search">
-              REGISTER
-            </Button>
-          </div>
-        )}
-      </>
-    );
-  };
+  if (loading) {
+    <div>Loading...</div>;
+  }
 
   return (
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 450 }} aria-label="simple table">
           <TableBody>
-            {Books.slice(0, loadIndex).map((book: Book) => (
+            {books.slice(0, loadIndex).map((book: Book) => (
               <TableRow
                 key={book.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -151,9 +163,6 @@ export const BookIndex: React.FC<BookProps> = (books) => {
       </TableContainer>
       <div>
         <DisplayButton />
-      </div>
-      <div>
-        <RegiterButton />
       </div>
     </>
   );

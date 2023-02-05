@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useAuth0 } from "@auth0/auth0-react";
-import { BorrowedBook } from "../../components/borrowedBook";
-import BorrowedBookHitory from "../../components/borrowedBookHistory";
+import { BorrowedBook } from "../../components/book/borrowedBook";
+import BorrowedBookHitory from "../../components/book/borrowedBookHistory";
 import GlobalHeader from "../../components/globalHeader";
 import { Typography, Divider, Container } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";

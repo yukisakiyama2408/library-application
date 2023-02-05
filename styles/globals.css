@@ -50,6 +50,12 @@ a {
 .register-button {
   margin-top: 10px;
 }
+.register-search-form {
+  margin-top: 50px;
+}
+.register-form {
+  margin-top: 40px;
+}
 
 .detail-book-img {
   height: 350px;
