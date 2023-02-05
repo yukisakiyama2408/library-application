@@ -9,6 +9,8 @@ import theme from "../src/theme";
 import createEmotionCache from "../src/createEmotionCache";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import { FC, ReactNode } from "react";
+import { Session } from "next-auth";
+// import { SessionProvider } from "next-auth/react";
 
 const clientSideEmotionCache = createEmotionCache();
 interface MyAppProps extends AppProps {
@@ -28,11 +30,14 @@ function MyApp({
   pageProps,
 }: MyAppProps) {
   return (
+    // <SessionProvider session={pageProps.session}>
+
+    // </SessionProvider>
     <Auth0Provider
       domain={secrets.NEXT_PUBLIC_AUTH_DOMAIN}
       clientId={secrets.NEXT_PUBLIC_AUTH0_CLIENT_ID}
-      // redirectUri="http://localhost:3000"
-      redirectUri={secrets.NEXT_PUBLIC_REDIRECT_URL}
+      redirectUri="http://localhost:3000"
+      // redirectUri={secrets.NEXT_PUBLIC_REDIRECT_URL}
       audience={secrets.NEXT_PUBLIC_HASURA_AUDIENCE}
     >
       <CacheProvider value={emotionCache}>

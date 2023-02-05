@@ -52,7 +52,11 @@ const BookDetail = () => {
 
   const { data, loading } = useQuery(GET_BOOK_INFO, {
     variables: { id: id },
+    onError: (...args) => {
+      console.log(args);
+    },
     onCompleted: (data) => {
+      console.log("hoge");
       setBookId(data.books[0].id);
       setTitle(data.books[0].title);
       setAuthor(data.books[0].author);
