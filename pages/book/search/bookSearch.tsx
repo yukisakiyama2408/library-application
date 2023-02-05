@@ -15,7 +15,7 @@ interface Book {
   };
 }
 
-type Props = {
+export type Props = {
   books: Array<Book>;
 };
 
