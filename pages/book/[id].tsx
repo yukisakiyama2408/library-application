@@ -29,6 +29,9 @@ interface Book {
     map: any;
     id: number;
   };
+  book_shelf: {
+    shelfname: string;
+  };
 }
 
 type BorrowBook = {
@@ -65,6 +68,7 @@ const BookDetail = () => {
   });
 
   const book: Book = !data ? [] : data.books[0];
+
   const borrowBook =
     book.borrowed_books &&
     book.borrowed_books.map((borrowed_book: BorrowBook) => borrowed_book.id);
@@ -161,6 +165,13 @@ const BookDetail = () => {
                             id={book.id}
                             borrowingUser={borrowingUser}
                           />
+                          <Typography
+                            gutterBottom
+                            variant="subtitle1"
+                            component="div"
+                          >
+                            場所: {book.book_shelf && book.book_shelf.shelfname}
+                          </Typography>
                         </div>
                       )}
                     </div>

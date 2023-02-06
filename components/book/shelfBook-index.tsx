@@ -55,12 +55,10 @@ export interface User {
 }
 
 export const BookShelfIndex: React.FC<PropsShelf> = ({ shelfId }) => {
-  console.log(shelfId);
   const { data, loading } = useQuery(GET_SHELF_BOOKS, {
     variables: { placed_shelf_id: shelfId },
   });
   const books = !data ? [] : data.books;
-  console.log(books);
   const [userId, setUserId] = useState(0);
   const { user } = useAuth0();
   const { data: data2 } = useQuery(GET_USER, {

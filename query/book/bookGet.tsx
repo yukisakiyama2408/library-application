@@ -27,6 +27,9 @@ export const GET_BOOK_INFO = gql`
         id
         borrowed_book_id
       }
+      book_shelf {
+        shelfname
+      }
     }
   }
 `;
