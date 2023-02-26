@@ -37,7 +37,7 @@ export const GET_BOOK_INFO = gql`
 export const GET_BORROWED_BOOK_INFO = gql`
   query getBorrowedBook($id: [Int!]) {
     borrowed_books(where: { borrowing_user_id: { _in: $id } }) {
-      date
+      returnDate
       book {
         id
         title

@@ -21,7 +21,11 @@ export type Props = {
 };
 
 const BookSearch = () => {
-  const { data } = useQuery<Props>(GET_BOOKS);
+  const { data } = useQuery<Props>(GET_BOOKS, {
+    onError: (...args) => {
+      console.log(args);
+    },
+  });
   const books = !data ? [] : data.books;
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
 

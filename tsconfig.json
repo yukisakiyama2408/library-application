@@ -19,7 +19,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/api/auth/[...nextauth].js"
+    "pages/api/auth/[...nextauth].tsts",
+    "pages/api/auth/[...nextauth].tsxsx",
+    "pages/api/apollo-client.jsxsx"
   ],
   "exclude": ["node_modules"]
 }

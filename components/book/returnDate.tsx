@@ -5,8 +5,7 @@ import dayjs from "dayjs";
 export const LimitDate = (date: Date) => {
   const now = dayjs();
   const ActualDate = now.format();
-  const BorrowDate = dayjs(date).format();
-  const ReturnDate = dayjs(BorrowDate).add(2, "w").format();
+  const ReturnDate = dayjs(date).format();
   const DateDiff = dayjs(ReturnDate).diff(dayjs(ActualDate), "day");
   return (
     <>

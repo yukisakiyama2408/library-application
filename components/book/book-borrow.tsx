@@ -1,6 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import dayjs from "dayjs";
 import {
   Button,
   Dialog,
@@ -11,11 +12,16 @@ import {
 } from "@mui/material";
 
 const BORROW_BOOK = gql`
-  mutation ($borrowed_book_id: Int!, $borrowing_user_id: Int!) {
+  mutation (
+    $borrowed_book_id: Int!
+    $borrowing_user_id: Int!
+    $returnDate: date!
+  ) {
     insert_borrowed_books(
       objects: {
         borrowed_book_id: $borrowed_book_id
         borrowing_user_id: $borrowing_user_id
+        returnDate: $returnDate
       }
     ) {
       affected_rows
@@ -23,7 +29,7 @@ const BORROW_BOOK = gql`
         id
         borrowed_book_id
         borrowing_user_id
-        date
+        returnDate
       }
     }
   }
@@ -55,11 +61,17 @@ type BookId = {
 
 const BookBorrow: React.FC<BookId> = ({ id, borrowingUser }) => {
   const router = useRouter();
-
+  const now = dayjs();
+  const ReturnDate = dayjs(now).add(2, "w").format();
+  const toApiReturnDate = dayjs(ReturnDate).format("YYYY-MM-DD");
   const [borrowBook] = useMutation(BORROW_BOOK);
   const handleBorrowBook = () => {
     borrowBook({
-      variables: { borrowed_book_id: id, borrowing_user_id: borrowingUser },
+      variables: {
+        borrowed_book_id: id,
+        borrowing_user_id: borrowingUser,
+        returnDate: toApiReturnDate,
+      },
     });
   };
 
