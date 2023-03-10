@@ -5,7 +5,7 @@ import { Card, CardContent, CardMedia, Typography, Grid } from "@mui/material";
 import { GET_BORROWED_BOOK_INFO } from "../../query/book/bookGet";
 
 interface Book {
-  date: Date;
+  returnDate: Date;
   book: {
     id: string;
     title: string;
@@ -36,7 +36,7 @@ export const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
     variables: { id: borrowedUserIds },
   });
   const borrowedbooks = !data ? [] : data.borrowed_books;
-
+  console.log(borrowedbooks);
   return (
     <>
       {borrowedUserIds && borrowedUserIds.length > 0 ? (
@@ -62,7 +62,7 @@ export const BorrowedBook: React.FC<BookIds> = ({ bookId }) => {
                   <CardContent>
                     <Typography variant="body2" color="text.secondary">
                       返却期限：
-                      {LimitDate(borrowedbook.date)}
+                      {LimitDate(borrowedbook.returnDate)}
                     </Typography>
                   </CardContent>
                   <div>
